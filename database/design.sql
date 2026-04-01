@@ -205,8 +205,6 @@ CREATE TABLE `facilities` (
     `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
 
-    -- TODO: facility_admin column
-
     `address` VARCHAR(255) NOT NULL,
     `district_id` INT,
     `phone_number` VARCHAR(20),
@@ -218,6 +216,18 @@ CREATE TABLE `facilities` (
     `updated_at` TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT `fk_facilities_district` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`) ON DELETE RESTRICT
 );
+
+-- Table Facility_Admins
+CREATE TABLE `facility_admins`(
+    `username` VARCHAR(50) PRIMARY KEY,
+    `facility_id` BIGINT PRIMARY KEY,
+
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT `fk_facility_admins_user` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE RESTRICT,
+    CONSTRAINT `fk_facility_admins_facility` FOREIGN KEY (`facility_id`) REFERENCES `facilities` (`id`) ON DELETE RESTRICT
+)
+
 
 -- Table Facilities Hours
 CREATE TABLE `facility_hours` (

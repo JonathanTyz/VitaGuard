@@ -4,16 +4,16 @@
 
 ## IMPORTANT
 
-> [!NOTES]
+> [!NOTE]
 > Untuk migrate file buat dengan nama tabel sesuaikan dengan yang sudah dibuat di SQL
 
-> [!NOTES]
+> [!NOTE]
 > Untuk migrate yang diberi tanda `(SD)` tolong beri column softdeletes jika tidak ada di ERD, jika di ERD sudah ada kolom softdeletes tetap beri walau tidak ditandai.
 
-> [!NOTES]
+> [!NOTE]
 > Untuk seeder nama menggunakan PASCAL CASE (contoh: SayaMakanBakso, UserSeeder)
 
-> [!NOTES]
+> [!NOTE]
 > Untuk seeder nsudah dibuat VitaGuardSeeder sebagai referensi seeder agar anda lebih mudah. Bisa meniru punya JOSHUA. JIka bingung tanya saja di grup WA
 
 ## Batch 1: Joshua

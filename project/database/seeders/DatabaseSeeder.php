@@ -29,7 +29,12 @@ class DatabaseSeeder extends Seeder
             MedicalHistorySeeder::class,
             AllergenSeeder::class,
             MemberAllergiesSeeder::class,
-            MemberMedicalProfileSeeder::class
+            MemberMedicalProfileSeeder::class,
+            DoctorSeeder::class,
+            SpecialtiesSeeder::class,
+            DoctorSpecialtiesSeeder::class,
+            FacilitySeeder::class,
+            FacilityHoursSeeder::class,
         ]);
     }
 }

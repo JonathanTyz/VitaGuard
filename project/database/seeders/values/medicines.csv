@@ -1,0 +1,11 @@
+id,name,dosage_form,medicine_class,stock
+1,Amoxicillin 500mg,capsules,prescription,100
+2,Paracetamol 500mg,tablet,over_the_counter,500
+3,OBH Combi,syrup,over_the_counter,50
+4,Gentamicin,ointment,prescription,30
+5,Insulin Glargine,injection,prescription,20
+6,Cetirizine,tablet,limited_otc,150
+7,Neurobion Forte,tablet,over_the_counter,200
+8,Diapet,capsules,over_the_counter,100
+9,Betadine,injection,limited_otc,40
+10,Sangobion,capsules,over_the_counter,120

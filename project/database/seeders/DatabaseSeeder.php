@@ -35,6 +35,10 @@ class DatabaseSeeder extends Seeder
             DoctorSpecialtiesSeeder::class,
             FacilitySeeder::class,
             FacilityHoursSeeder::class,
+            ScheduleSeeder::class,
+            FacilityAdminnSeeder::class,
+            AppointmentSeeder::class,
+            MedicineSeeder::class,
         ]);
     }
 }

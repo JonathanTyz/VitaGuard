@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('name', 255);
             $table->string('address', 255);
             $table->unsignedBigInteger('district_id');
-            $table->foreign('district_id')->references('id')->on('districts')->cascadeOnDelete();
-            $table->string('phone', 20)->nullable();
+            $table->foreign('district_id')->references('id')->on('districts');
+            $table->string('phone', 20);
             $table->decimal('rating_avg', 3, 2)->nullable();
             $table->integer('rating_count')->default(0);
              
-             $table->timestamps();
-             $table->softDeletes();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

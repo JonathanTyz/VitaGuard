@@ -15,9 +15,9 @@ return new class extends Migration
         Schema::create('doctor_specialties', function (Blueprint $table) {
             $table->id();
             $table->string('username', 50);
-            $table->foreign('username')->references('username')->on('doctors')->cascadeOnDelete();
+            $table->foreign('username')->references('username')->on('doctors');
             $table->unsignedBigInteger('specialty_id');
-            $table->foreign('specialty_id')->references('id')->on('specialties')->cascadeOnDelete();
+            $table->foreign('specialty_id')->references('id')->on('specialties');
         });
     }
 

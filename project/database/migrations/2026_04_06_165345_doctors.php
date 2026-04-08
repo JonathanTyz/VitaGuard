@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('address', 255);
                 
             $table->unsignedBigInteger('district_id'); 
-            $table->foreign('district_id')->references('id')->on('districts')->cascadeOnDelete();
+            $table->foreign('district_id')->references('id')->on('districts');
 
             $table->decimal('rating_avg', 3, 2)->nullable();
             $table->integer('rating_count')->default(0);

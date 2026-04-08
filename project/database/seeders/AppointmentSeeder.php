@@ -7,7 +7,7 @@ require_once("VitaGuardSeeder.php");
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class AppointmentSeeder extends Seeder
+class AppointmentSeeder extends VitaGuardSeeder
 {
     /**
      * Run the database seeds.

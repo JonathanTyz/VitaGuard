@@ -39,6 +39,11 @@ class DatabaseSeeder extends Seeder
             FacilityAdminnSeeder::class,
             AppointmentSeeder::class,
             MedicineSeeder::class,
+            OnlineSessionSeeder::class,
+            ConsultationSeeder::class,
+            ChatSeeder::class,
+            PrescriptionSeeder::class,
+            PrescriptionDetailsSeeder::class,
         ]);
     }
 }

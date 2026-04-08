@@ -7,14 +7,14 @@ require_once("VitaGuardSeeder.php");
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MedicineSeeder extends VitaGuardSeeder
+class PrescriptionSeeder extends VitaGuardSeeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $this->tableName = 'medicines';
-        $this->runVitaGuardSeeder('medicines.csv');
+        $this->tableName = 'prescriptions';
+        $this->runVitaGuardSeeder('prescriptions.csv');
     }
 }

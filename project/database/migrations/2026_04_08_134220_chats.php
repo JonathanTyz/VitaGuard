@@ -21,13 +21,11 @@ return new class extends Migration
             $table->foreign('consultation_id')
                 ->references('id')
                 ->on('consultations')
-                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
             $table->foreign('sender')
                 ->references('username')
                 ->on('users')
-                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
         });
     }

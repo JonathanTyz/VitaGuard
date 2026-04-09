@@ -24,13 +24,11 @@ return new class extends Migration
             $table->foreign('online_session_id')
                 ->references('id')
                 ->on('online_sessions')
-                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
             $table->foreign('member_username')
                 ->references('username')
                 ->on('members')
-                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
         });
     }

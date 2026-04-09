@@ -26,7 +26,6 @@ return new class extends Migration
             $table->foreign('prescription_id')
                 ->references('id')
                 ->on('prescriptions')
-                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
             $table->foreign('medicine_id')
@@ -38,7 +37,6 @@ return new class extends Migration
             $table->foreign('taken_at')
                 ->references('id')
                 ->on('facilities')
-                ->restrictOnDelete()
                 ->cascadeOnUpdate();
         });
     }

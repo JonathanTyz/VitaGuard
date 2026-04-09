@@ -24,25 +24,21 @@ return new class extends Migration
             $table->foreign('doctor_username')
                 ->references('username')
                 ->on('doctors')
-                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
             $table->foreign('member_username')
                 ->references('username')
                 ->on('members')
-                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
             $table->foreign('appointment_id')
                 ->references('id')
                 ->on('appointments')
-                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
             $table->foreign('consultation_id')
                 ->references('id')
                 ->on('consultations')
-                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
         });
 

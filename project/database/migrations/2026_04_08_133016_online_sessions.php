@@ -23,7 +23,6 @@ return new class extends Migration
             $table->foreign('doctor_username')
                 ->references('username')
                 ->on('doctors')
-                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
         });
     }

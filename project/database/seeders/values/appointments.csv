@@ -1,4 +1,4 @@
-id,member_username,schedule_id,date,status,queue_order
+id,member_username,schedule_id,appointment_date,status,queue_order
 1,jdoe01,1,2026-04-13,confirmed,1
 2,charlie77,1,2026-04-13,pending,2
 3,eko_prat,2,2026-04-14,confirmed,1

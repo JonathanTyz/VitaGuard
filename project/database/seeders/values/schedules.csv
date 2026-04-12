@@ -1,4 +1,4 @@
-id,doctor_username,facility_id,day_of_week,start_time,end_time,slot_duration,fee
+id,doctor_username,facility_id,day_of_week,start_time,end_time,slot_duration_minutes,consultation_fee
 1,doc001,1,monday,8:00,12:00,30,150000
 2,doc002,2,tuesday,13:00,17:00,20,200000
 3,doc003,3,wednesday,9:00,14:00,30,125000

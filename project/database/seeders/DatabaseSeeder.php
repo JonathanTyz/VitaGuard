@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             FacilitySeeder::class,
             FacilityHoursSeeder::class,
             ScheduleSeeder::class,
-            FacilityAdminnSeeder::class,
+            FacilityAdminSeeder::class,
             AppointmentSeeder::class,
             MedicineSeeder::class,
             OnlineSessionSeeder::class,

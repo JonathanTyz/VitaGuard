@@ -35,11 +35,11 @@ class HomeController extends Controller
         $member_allergies = MemberAllergy::all();
         $provinces = Province::all();
         $users = User::all();
-        $speciality = Speciality::all();
-        $doctor = Doctor::all();
-        $doctor_speciality = DoctorSpecialty::all();
-        $facility = Facility::all();
-        $facility_hour = FacilityHour::all();
+        $specialities = Speciality::all();
+        $doctors = Doctor::all();
+        $doctor_specialities = DoctorSpecialty::all();
+        $facilities = Facility::all();
+        $facility_hours = FacilityHour::all();
 
         $dataTables = [
             'articles' => $articles,
@@ -52,11 +52,11 @@ class HomeController extends Controller
             'member_allergies' => $member_allergies,
             'provinces' => $provinces,
             'users' => $users,
-            'speciality' => $speciality,
-            'doctor' => $doctor,
-            'doctor_speciality' => $doctor_speciality,
-            'facility' => $facility,
-            'facility_hour' => $facility_hour,
+            'specialities' => $specialities,
+            'doctors' => $doctors,
+            'doctor_specialities' => $doctor_specialities,
+            'facilities' => $facilities,
+            'facility_hours' => $facility_hours,
         ];
 
         return view('welcome', compact('dataTables'));

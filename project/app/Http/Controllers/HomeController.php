@@ -17,6 +17,11 @@ use App\Models\Doctor;
 use App\Models\DoctorSpecialty;
 use App\Models\Facility;
 use App\Models\FacilityHour;
+use App\Models\OnlineSession;
+use App\Models\Consultation;
+use App\Models\Chat;
+use App\Models\Prescription;
+use App\Models\PrescriptionDetail;
 
 
 use Illuminate\Http\Request;
@@ -40,6 +45,11 @@ class HomeController extends Controller
         $doctor_specialities = DoctorSpecialty::all();
         $facilities = Facility::all();
         $facility_hours = FacilityHour::all();
+        $online_sessions = OnlineSession::all();
+        $consultations = Consultation::all();
+        $chats = Chat::all();
+        $prescriptions = Prescription::all();
+        $prescription_details = PrescriptionDetail::all();
 
         $dataTables = [
             'articles' => $articles,
@@ -57,6 +67,11 @@ class HomeController extends Controller
             'doctor_specialities' => $doctor_specialities,
             'facilities' => $facilities,
             'facility_hours' => $facility_hours,
+            'online_sessions' => $online_sessions,
+            'consultations' => $consultations,
+            'chats' => $chats,
+            'prescriptions' => $prescriptions,
+            'prescription_details' => $prescription_details,
         ];
 
         return view('welcome', compact('dataTables'));

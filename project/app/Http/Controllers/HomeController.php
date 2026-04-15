@@ -22,6 +22,10 @@ use App\Models\Consultation;
 use App\Models\Chat;
 use App\Models\Prescription;
 use App\Models\PrescriptionDetail;
+use App\Models\Medicine;
+use App\Models\Schedule;
+use App\Models\FacilityAdmin;
+use App\Models\Appointment;
 
 
 use Illuminate\Http\Request;
@@ -50,6 +54,10 @@ class HomeController extends Controller
         $chats = Chat::all();
         $prescriptions = Prescription::all();
         $prescription_details = PrescriptionDetail::all();
+        $medicines = Medicine::all();
+        $appointments = Appointment::all();
+        $schedules = Schedule::all();
+        $facility_admins = FacilityAdmin::all();
 
         $dataTables = [
             'articles' => $articles,
@@ -72,6 +80,10 @@ class HomeController extends Controller
             'chats' => $chats,
             'prescriptions' => $prescriptions,
             'prescription_details' => $prescription_details,
+            'medicines' => $medicines,
+            'appointments' => $appointments,
+            'facility_admins' => $facility_admins,
+            'schedules' => $schedules
         ];
 
         return view('welcome', compact('dataTables'));

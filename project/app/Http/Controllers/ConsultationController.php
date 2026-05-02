@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ChatDokterController extends Controller
+class ConsultationController extends Controller
 {
     public function index(Request $request)
     {
-        return view('pages.chatDokter.index');
+        return view('pages.public.appointment.index');
     }
 }

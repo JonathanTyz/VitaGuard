@@ -15,11 +15,20 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        $userRole = auth()->user()->role;
-
-        if (in_array($userRole, $roles)) {
+        if (!$request->user()) {
+            abort(401, 'Unauthenticated');
+        }
+        if (empty($roles)) {
             return $next($request);
         }
-        abort(403, 'Akses Ditolak');
+        $userRole = $request->user()->role;
+        if (blank($userRole)) {
+            abort(403, 'Access Denied: No role assigned');
+        }
+        if (!in_array($userRole, $roles, strict: true)) {
+            abort(403, 'Access Denied');
+        }
+
+        return $next($request);
     }
 }

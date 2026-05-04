@@ -61,7 +61,7 @@ class HomeController extends Controller
 
         $dataTables = [
             'articles' => $articles,
-            'Ararticle_topics' => $article_topics,
+            'article_topics' => $article_topics,
             'allergens' => $allergens,
             'cities' => $cities,
             'districts' => $districts,

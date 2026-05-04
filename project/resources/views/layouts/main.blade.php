@@ -70,7 +70,25 @@
             });
         });
     </script>
-    @include('layouts.navbar')
+    @auth
+    @if(Auth::user()->role == 'doctor')
+    @include('layouts.navbar.doctor')
+
+    @elseif(Auth::user()->role == 'admin')
+    @include('layouts.navbar.admin')
+
+    @elseif(Auth::user()->role == 'member')
+    @include('layouts.navbar.member')
+
+    @elseif(Auth::user()->role == 'facility_admin')
+    @include('layouts.navbar.facility')
+
+    @endif
+    @endauth
+
+    @guest
+    @include('layouts.navbar.guest')    
+    @endguest
 
     @yield('content')
 </body>

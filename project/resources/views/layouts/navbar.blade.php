@@ -1,5 +1,5 @@
-<nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-transparent navbar-custom">
-    <a class="navbar-brand" href="#">
+<!-- <nav id="navbar" class="navbar navbar-expand-lg {{ Request::is('/', 'home') ? 'navbar-dark bg-transparent' : 'navbar-light bg-light' }} navbar-custom">
+    <a class="navbar-brand" href="/home">
         <b>Vita</b>Guard
     </a>
 
@@ -9,25 +9,19 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/home">Beranda</a>
+            <li class="nav-item {{ Request::is('/', 'home') ? 'active' : '' }}">
+                <a class="nav-link" href="/home">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/chat-dokter">Chat Dokter</a>
+            <li class="nav-item {{ Request::is('consultations*') ? 'active' : '' }}">
+                <a class="nav-link" href="/consultations">Consultations</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/konsultasi-offline">Konsultasi Offline</a>
+            <li class="nav-item {{ Request::is('appointments*') ? 'active' : '' }}">
+                <a class="nav-link" href="/appointments">Appointment</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/daftar-dokter">Daftar Dokter</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/riwayat-konsultasi">Riwayat Konsultasi</a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-primary text-light    ml-2">Daftar Akun</a>
-            </li>
+            <li class="nav-item {{ Request::is('doctors*') ? 'active' : '' }}">
+                <a class="nav-link" href="/doctors">Doctors</a>
+            </li>    
         </ul>
     </div>
 
-</nav>
+</nav> -->

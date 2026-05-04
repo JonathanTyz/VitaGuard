@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
-    #region APP ROUTES
+    #region API ROUTES (TEMPORARY)
     #endregion
 
     #region VIEW ROUTES

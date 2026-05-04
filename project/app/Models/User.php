@@ -11,7 +11,6 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
     protected $primaryKey = 'username';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -27,6 +26,7 @@ class User extends Authenticatable
         'phone_number',
         'role',
         'status',
+        'last_login_at'
     ];
 
     /**

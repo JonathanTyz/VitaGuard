@@ -12,9 +12,9 @@ class DoctorSpecialty extends Model
     {
         return $this->belongsTo(Doctor::class, 'doctor_id');
     }
-    public function speciality()
+    public function specialties()
     {
-        return $this->belongsTo(Speciality::class, 'speciality_id');
+        return $this->belongsTo(Specialties::class, 'specialties_id');
     }
     
 }

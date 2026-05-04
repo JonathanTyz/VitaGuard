@@ -36,6 +36,8 @@ class RouteServiceProvider extends ServiceProvider
 
             #region ROLE BASED ROUTE
             Route::middleware('web')
+                ->group(base_path('routes/role/auth.php'));
+            Route::middleware('web')
                 ->group(base_path('routes/role/member.php'));
             Route::middleware('web')
                 ->group(base_path('routes/role/doctor.php'));

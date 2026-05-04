@@ -7,6 +7,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     #endregion
 
     #region VIEW ROUTES
-    Route::view("/home","admin.index")->name('home');
+    Route::view("/admin/home","admin.index")->name('admin.home');
     #endregion
 });

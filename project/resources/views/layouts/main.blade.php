@@ -70,7 +70,7 @@
             });
         });
     </script>
-    
+
     @auth
     @if(Auth::user()->role == 'admin')
     @include('layouts.navbar.admin')

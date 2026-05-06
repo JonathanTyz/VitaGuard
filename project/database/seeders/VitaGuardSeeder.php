@@ -67,7 +67,7 @@ class VitaGuardSeeder extends Seeder
 
     /**
      * Store header names
-     * @param array $row
+     * @param array $csv
      * @return void
      */
     protected function createCapsule($csv): void
@@ -130,8 +130,7 @@ class VitaGuardSeeder extends Seeder
      * To be overridden if data manipulation needed
      * @param mixed $dataArray
      * @return array
-     */
-    protected function modifyData($dataArray): array
+     */protected function modifyData($dataArray): array
     {
         return $dataArray;
     }

@@ -49,15 +49,15 @@
 ## Batch 3: Jonathan
 
 ### Migrate
-- [ ] specialities 
+- [ ] specialties 
 - [ ] doctors `(SD)`
-- [ ] doctor_specialities
+- [ ] doctor_specialties
 - [ ] facilities `(SD)`
 - [ ] facility_hours
 ### Seed
-- [ ] specialities 
+- [ ] specialties 
 - [ ] doctors `(SD)`
-- [ ] doctor_specialities
+- [ ] doctor_specialties
 - [ ] facilities `(SD)`
 - [ ] facility_hours
 

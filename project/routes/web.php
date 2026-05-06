@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 #region MAIN APP ROUTE
@@ -13,8 +15,8 @@ Route::post('/logout', [AuthController::class, 'logout'])
 #endregion
 
 #region MAIN VIEW ROUTE
-Route::view('/', 'landing')->name('landing');
+Route::get('/', [HomeController::class, 'index'])->name('landing');
 Route::view('/login', 'auth.login')->name('login');
-Route::view('/articles','articles.index')->name('articles');
-Route::view('/articles/{id}','articles.read')->name('read-articles');
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
+Route::get('/articles/{id}',[ArticleController::class, 'show'])->name('read-articles');
 #endregion

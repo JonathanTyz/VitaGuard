@@ -123,13 +123,13 @@ class MemberTest extends TestCase
 
         $this->assertArrayHasKey('username', $array);
         $this->assertArrayHasKey('email', $array);
-        $this->assertArrayHasKey('firstName', $array);
-        $this->assertArrayHasKey('lastName', $array);
+        $this->assertArrayHasKey('first_name', $array);
+        $this->assertArrayHasKey('last_name', $array);
         $this->assertArrayHasKey('gender', $array);
-        $this->assertArrayHasKey('dateOfBirth', $array);
+        $this->assertArrayHasKey('date_of_birth', $array);
         $this->assertArrayHasKey('address', $array);
         $this->assertEquals('john_doe', $array['username']);
-        $this->assertEquals('John', $array['firstName']);
+        $this->assertEquals('John', $array['first_name']);
         $this->assertEquals('male', $array['gender']);
     }
 
@@ -151,13 +151,13 @@ class MemberTest extends TestCase
         $data = [
             'username' => 'john_doe',
             'email' => 'john@example.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'status' => 'active',
-            'firstName' => 'John',
-            'middleName' => 'Michael',
-            'lastName' => 'Doe',
+            'first_name' => 'John',
+            'middle_name' => 'Michael',
+            'last_name' => 'Doe',
             'gender' => 'male',
-            'dateOfBirth' => '1990-05-15 00:00:00',
+            'date_of_birth' => '1990-05-15 00:00:00',
             'address' => $addressData,
             'role' => 'member'
         ];

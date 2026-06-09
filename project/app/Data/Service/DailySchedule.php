@@ -13,8 +13,8 @@ abstract class DailySchedule
     private DayOfWeek $day;
     private Carbon $open;
     private Carbon $close;
-    private ?Carbon $breakStart;
-    private ?Carbon $breakEnd;
+    private ?Carbon $break_start_time;
+    private ?Carbon $break_end_time;
     #endregion
 
     #region CONSTRUCTOR
@@ -23,15 +23,15 @@ abstract class DailySchedule
         DayOfWeek $day,
         Carbon $open,
         Carbon $close,
-        ?Carbon $breakStart = null,
-        ?Carbon $breakEnd = null
+        ?Carbon $break_start_time = null,
+        ?Carbon $break_end_time = null
     ) {
         $this->setId($id);
         $this->setDay($day);
         $this->setOpen($open);
         $this->setClose($close);
-        $this->setBreakStart($breakStart);
-        $this->setBreakEnd($breakEnd);
+        $this->setBreakStart($break_start_time);
+        $this->setBreakEnd($break_end_time);
     }
     #endregion
 
@@ -58,12 +58,12 @@ abstract class DailySchedule
 
     public function getBreakStart(): ?Carbon
     {
-        return $this->breakStart;
+        return $this->break_start_time;
     }
 
     public function getBreakEnd(): ?Carbon
     {
-        return $this->breakEnd;
+        return $this->break_end_time;
     }
     #endregion
 
@@ -96,20 +96,20 @@ abstract class DailySchedule
         if ($value !== null && $value < $this->open) {
             throw new InvalidArgumentException("Break cannot start before opening time.");
         }
-        $this->breakStart = $value;
+        $this->break_start_time = $value;
     }
 
     public function setBreakEnd(?Carbon $value): void
     {
-        if ($value !== null && $this->breakStart !== null) {
-            if ($value <= $this->breakStart) {
+        if ($value !== null && $this->break_start_time !== null) {
+            if ($value <= $this->break_start_time) {
                 throw new InvalidArgumentException("Break end time must be after break start time.");
             }
         }
         if ($value !== null && $value > $this->close) {
             throw new InvalidArgumentException("Break cannot end after closing time.");
         }
-        $this->breakEnd = $value;
+        $this->break_end_time = $value;
     }
     #endregion
 

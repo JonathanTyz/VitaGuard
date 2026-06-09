@@ -12,7 +12,7 @@ class Facility
     private int $id;
     private string $name;
     private Address $address;
-    private string $phoneNumber;
+    private string $phone_number;
     private float $rating;
     #endregion
 
@@ -21,13 +21,13 @@ class Facility
         int $id,
         string $name,
         Address $address,
-        string $phoneNumber,
+        string $phone_number,
         float $rating
     ) {
         $this->setId($id);
         $this->setName($name);
         $this->setAddress($address);
-        $this->setPhoneNumber($phoneNumber);
+        $this->setPhoneNumber($phone_number);
         $this->setRating($rating);
     }
     #endregion
@@ -50,7 +50,7 @@ class Facility
 
     public function getPhoneNumber(): string
     {
-        return $this->phoneNumber;
+        return $this->phone_number;
     }
 
     public function getRating(): float
@@ -95,7 +95,7 @@ class Facility
         if (mb_strlen($value) > $maxLength) {
             throw new InvalidArgumentException("Phone Number cannot exceed {$maxLength} characters.");
         }
-        $this->phoneNumber = $value;
+        $this->phone_number = $value;
     }
 
     public function setRating(float $value): void
@@ -114,7 +114,7 @@ class Facility
             'id' => $this->getId(),
             'name' => $this->getName(),
             'address' => $this->getAddress()->toArray(),
-            'phoneNumber' => $this->getPhoneNumber(),
+            'phone_number' => $this->getPhoneNumber(),
             'rating' => $this->getRating(),
         ];
     }
@@ -131,7 +131,7 @@ class Facility
             (int) $data['id'],
             $data['name'],
             Address::fromArray($data['address']),
-            $data['phoneNumber'],
+            $data['phone_number'],
             (float) $data['rating']
         );
     }

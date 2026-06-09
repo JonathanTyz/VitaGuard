@@ -16,11 +16,11 @@ class Appointment
     private Member $patient;
     private Carbon $date;
     private Carbon $time;
-    private int $queueOrder;
+    private int $queue_order;
     private AppointmentStatus $status;
     private ?string $notes;
-    private ?Carbon $checkInTime;
-    private ?Carbon $completedTime;
+    private ?Carbon $check_in_time;
+    private ?Carbon $completed_time;
     #endregion
 
     #region CONSTRUCTOR
@@ -30,22 +30,22 @@ class Appointment
         Member $patient,
         Carbon $date,
         Carbon $time,
-        int $queueOrder,
+        int $queue_order,
         AppointmentStatus $status,
         ?string $notes = null,
-        ?Carbon $checkInTime = null,
-        ?Carbon $completedTime = null
+        ?Carbon $check_in_time = null,
+        ?Carbon $completed_time = null
     ) {
         $this->setId($id);
         $this->setDoctor($doctor);
         $this->setPatient($patient);
         $this->setDate($date);
         $this->setTime($time);
-        $this->setQueueOrder($queueOrder);
+        $this->setQueueOrder($queue_order);
         $this->setStatus($status);
         $this->setNotes($notes);
-        $this->setCheckInTime($checkInTime);
-        $this->setCompletedTime($completedTime);
+        $this->setCheckInTime($check_in_time);
+        $this->setCompletedTime($completed_time);
     }
     #endregion
 
@@ -77,7 +77,7 @@ class Appointment
 
     public function getQueueOrder(): int
     {
-        return $this->queueOrder;
+        return $this->queue_order;
     }
 
     public function getStatus(): AppointmentStatus
@@ -92,12 +92,12 @@ class Appointment
 
     public function getCheckInTime(): ?Carbon
     {
-        return $this->checkInTime;
+        return $this->check_in_time;
     }
 
     public function getCompletedTime(): ?Carbon
     {
-        return $this->completedTime;
+        return $this->completed_time;
     }
     #endregion
 
@@ -132,7 +132,7 @@ class Appointment
         if ($value < 1) {
             throw new InvalidArgumentException("Queue order must be a positive integer.");
         }
-        $this->queueOrder = $value;
+        $this->queue_order = $value;
     }
 
     public function setStatus(AppointmentStatus $value): void
@@ -150,20 +150,20 @@ class Appointment
         if ($value !== null && $value < $this->date) {
             throw new InvalidArgumentException("Check-in time cannot be earlier than the appointment date.");
         }
-        $this->checkInTime = $value;
+        $this->check_in_time = $value;
     }
 
     public function setCompletedTime(?Carbon $value): void
     {
         if ($value !== null) {
-            if ($this->checkInTime !== null && $value < $this->checkInTime) {
+            if ($this->check_in_time !== null && $value < $this->check_in_time) {
                 throw new InvalidArgumentException("Completion time cannot be earlier than check-in time.");
             }
             if ($value < $this->date) {
                 throw new InvalidArgumentException("Completion time cannot be earlier than the appointment date.");
             }
         }
-        $this->completedTime = $value;
+        $this->completed_time = $value;
     }
     #endregion
 

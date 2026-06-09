@@ -10,9 +10,9 @@ class DoctorSchedule extends DailySchedule
     #region FIELDS
     private Facility $facility;
     private string $notes;
-    private ?int $slotDurationMinutes;
-    private ?int $maxPatients;
-    private ?float $consultationFee;
+    private ?int $slot_duration_minutes;
+    private ?int $max_patients;
+    private ?float $consultation_fee;
     #endregion 
 
     #region CONSTRUCTOR
@@ -23,19 +23,19 @@ class DoctorSchedule extends DailySchedule
         Carbon $close,
         Facility $facility,
         string $notes,
-        ?int $slotDurationMinutes = null,
-        ?int $maxPatients = null,
-        ?float $consultationFee = null,
-        ?Carbon $breakStart = null,
-        ?Carbon $breakEnd = null
+        ?int $slot_duration_minutes = null,
+        ?int $max_patients = null,
+        ?float $consultation_fee = null,
+        ?Carbon $break_start_time = null,
+        ?Carbon $break_end_time = null
     ) {
-        parent::__construct($id, $day, $open, $close, $breakStart, $breakEnd);
+        parent::__construct($id, $day, $open, $close, $break_start_time, $break_end_time);
         
         $this->setNotes($notes);
         $this->setFacility($facility);
-        $this->setSlotDurationMinutes($slotDurationMinutes);
-        $this->setMaxPatients($maxPatients);
-        $this->setConsultationFee($consultationFee);
+        $this->setSlotDurationMinutes($slot_duration_minutes);
+        $this->setMaxPatients($max_patients);
+        $this->setConsultationFee($consultation_fee);
     }
     #endregion
 
@@ -52,17 +52,17 @@ class DoctorSchedule extends DailySchedule
 
     public function getslotDurationMinutes(): ?int
     {
-        return $this->slotDurationMinutes;
+        return $this->slot_duration_minutes;
     }
 
     public function getMaxPatients(): ?int
     {
-        return $this->maxPatients;
+        return $this->max_patients;
     }
 
     public function getConsultationFee(): ?float
     {
-        return $this->consultationFee;
+        return $this->consultation_fee;
     }
     #endregion
 
@@ -79,17 +79,17 @@ class DoctorSchedule extends DailySchedule
 
     public function setSlotDurationMinutes(?int $value): void
     {
-        $this->slotDurationMinutes = $value;
+        $this->slot_duration_minutes = $value;
     }
 
     public function setMaxPatients(?int $value): void
     {
-        $this->maxPatients = $value;
+        $this->max_patients = $value;
     }
 
     public function setConsultationFee(?float $value): void
     {
-        $this->consultationFee = $value;
+        $this->consultation_fee = $value;
     }
     #endregion
 

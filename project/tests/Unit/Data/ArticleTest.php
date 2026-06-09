@@ -118,8 +118,8 @@ class ArticleTest extends TestCase
         $this->assertArrayHasKey('creator', $array);
         $this->assertArrayHasKey('topic', $array);
         $this->assertArrayHasKey('content', $array);
-        $this->assertArrayHasKey('createdAt', $array);
-        $this->assertArrayHasKey('updatedAt', $array);
+        $this->assertArrayHasKey('created_at', $array);
+        $this->assertArrayHasKey('updated_at', $array);
         $this->assertEquals('This is the article content...', $array['content']);
     }
 
@@ -141,14 +141,14 @@ class ArticleTest extends TestCase
         $creatorData = [
             'username' => 'john_doe',
             'email' => 'john@example.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'role' => 'member',
             'status' => 'active',
-            'firstName' => 'John',
-            'middleName' => '',
-            'lastName' => 'Doe',
+            'first_name' => 'John',
+            'middle_name' => '',
+            'last_name' => 'Doe',
             'gender' => 'male',
-            'dateOfBirth' => '1990-01-01 00:00:00',
+            'date_of_birth' => '1990-01-01 00:00:00',
             'address' => $addressData
         ];
 
@@ -161,8 +161,8 @@ class ArticleTest extends TestCase
             'creator' => $creatorData,
             'topic' => $topicData,
             'content' => 'Article content here',
-            'createdAt' => '2024-01-01 10:00:00',
-            'updatedAt' => '2024-01-01 10:00:00'
+            'created_at' => '2024-01-01 10:00:00',
+            'updated_at' => '2024-01-01 10:00:00'
         ];
         $article = Article::fromArray($data);
 

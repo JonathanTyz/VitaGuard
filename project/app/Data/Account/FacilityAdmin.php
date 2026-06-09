@@ -16,11 +16,11 @@ class FacilityAdmin extends User
     public function __construct(
         string $username,
         string $email,
-        string $phoneNumber,
+        string $phone_number,
         Facility $facility,
         Status $status
     ) {
-        parent::__construct($username, $email, $phoneNumber, Role::FACILITY_ADMIN, $status);
+        parent::__construct($username, $email, $phone_number, Role::FACILITY_ADMIN, $status);
         $this->setFacility($facility);
     }
     #endregion
@@ -58,7 +58,7 @@ class FacilityAdmin extends User
         return new self(
             $data['username'],
             $data['email'],
-            $data['phoneNumber'],
+            $data['phone_number'],
             Facility::fromArray($data['facility']),
             Status::from($data['status'])
         );

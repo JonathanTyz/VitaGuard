@@ -52,7 +52,7 @@ class AdminTest extends TestCase
 
         $this->assertArrayHasKey('username', $array);
         $this->assertArrayHasKey('email', $array);
-        $this->assertArrayHasKey('phoneNumber', $array);
+        $this->assertArrayHasKey('phone_number', $array);
         $this->assertArrayHasKey('role', $array);
         $this->assertArrayHasKey('status', $array);
         $this->assertEquals('super_admin', $array['username']);
@@ -65,7 +65,7 @@ class AdminTest extends TestCase
         $data = [
             'username' => 'super_admin',
             'email' => 'admin@system.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'status' => 'active',
             'role' => 'admin'
         ];

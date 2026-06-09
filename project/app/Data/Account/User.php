@@ -12,7 +12,7 @@ abstract class User
     #region FIELDS
     protected string $username;
     protected string $email;
-    protected string $phoneNumber;
+    protected string $phone_number;
     protected Role $role;
     protected Status $status;
     #endregion
@@ -21,13 +21,13 @@ abstract class User
     public function __construct(
         string $username,
         string $email,
-        string $phoneNumber,
+        string $phone_number,
         Role $role,
         Status $status
     ) {
         $this->setUsername($username);
         $this->setEmail($email);
-        $this->setPhoneNumber($phoneNumber);
+        $this->setPhoneNumber($phone_number);
         $this->setRole($role);
         $this->setStatus($status);
     }
@@ -46,7 +46,7 @@ abstract class User
 
     public function getPhoneNumber(): string
     {
-        return $this->phoneNumber;
+        return $this->phone_number;
     }
 
     public function getRole(): Role
@@ -104,7 +104,7 @@ abstract class User
         if (mb_strlen($value) > $maxLength) {
             throw new InvalidArgumentException("Phone Number cannot exceed {$maxLength} characters.");
         }
-        $this->phoneNumber = $value;
+        $this->phone_number = $value;
     }
 
     public function setRole(Role $value): void
@@ -124,7 +124,7 @@ abstract class User
         return [
             'username' => $this->username,
             'email' => $this->email,
-            'phoneNumber' => $this->phoneNumber,
+            'phone_number' => $this->phone_number,
             'role' => $this->role->value,
             'status' => $this->status->value,
         ];

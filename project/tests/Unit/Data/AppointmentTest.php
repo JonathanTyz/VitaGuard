@@ -134,10 +134,10 @@ class AppointmentTest extends TestCase
     public function testSetCheckInTimeAcceptsValidTime(): void
     {
         $appointment = $this->createValidAppointment();
-        $checkInTime = Carbon::parse('2024-01-15 09:30:00');
-        $appointment->setCheckInTime($checkInTime);
+        $check_in_time = Carbon::parse('2024-01-15 09:30:00');
+        $appointment->setCheckInTime($check_in_time);
 
-        $this->assertSame($checkInTime, $appointment->getCheckInTime());
+        $this->assertSame($check_in_time, $appointment->getCheckInTime());
     }
 
     public function testSetCompletedTimeThrowsExceptionWhenBeforeCheckInTime(): void
@@ -162,10 +162,10 @@ class AppointmentTest extends TestCase
     public function testSetCompletedTimeAcceptsValidTime(): void
     {
         $appointment = $this->createValidAppointment();
-        $completedTime = Carbon::parse('2024-01-15 10:30:00');
-        $appointment->setCompletedTime($completedTime);
+        $completed_time = Carbon::parse('2024-01-15 10:30:00');
+        $appointment->setCompletedTime($completed_time);
 
-        $this->assertSame($completedTime, $appointment->getCompletedTime());
+        $this->assertSame($completed_time, $appointment->getCompletedTime());
     }
 
     public function testSetStatus(): void
@@ -227,16 +227,16 @@ class AppointmentTest extends TestCase
         $doctorData = [
             'username' => 'dr_john',
             'email' => 'dr.john@example.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'status' => 'active',
-            'prefixName' => 'Dr.',
-            'firstName' => 'John',
-            'middleName' => '',
-            'lastName' => 'Doe',
-            'suffixName' => '',
+            'prefix_name' => 'Dr.',
+            'first_name' => 'John',
+            'middle_name' => '',
+            'last_name' => 'Doe',
+            'suffix_name' => '',
             'rating' => '4.5',
             'gender' => 'male',
-            'dateOfBirth' => '1980-01-01 00:00:00',
+            'date_of_birth' => '1980-01-01 00:00:00',
             'address' => $addressData,
             'specialties' => [],
             'role'=> 'doctor'
@@ -245,13 +245,13 @@ class AppointmentTest extends TestCase
         $patientData = [
             'username' => 'john_doe',
             'email' => 'john@example.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'status' => 'active',
-            'firstName' => 'John',
-            'middleName' => '',
-            'lastName' => 'Doe',
+            'first_name' => 'John',
+            'middle_name' => '',
+            'last_name' => 'Doe',
             'gender' => 'male',
-            'dateOfBirth' => '1990-01-01 00:00:00',
+            'date_of_birth' => '1990-01-01 00:00:00',
             'address' => $addressData,
             'role' => 'member'
         ];

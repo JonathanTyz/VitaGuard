@@ -71,7 +71,7 @@ class FacilityAdminTest extends TestCase
 
         $this->assertArrayHasKey('username', $array);
         $this->assertArrayHasKey('email', $array);
-        $this->assertArrayHasKey('phoneNumber', $array);
+        $this->assertArrayHasKey('phone_number', $array);
         $this->assertArrayHasKey('role', $array);
         $this->assertArrayHasKey('status', $array);
         $this->assertArrayHasKey('facility', $array);
@@ -98,14 +98,14 @@ class FacilityAdminTest extends TestCase
             'id' => 1,
             'name' => 'Test Hospital',
             'address' => $addressData,
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'rating' => 4.5
         ];
 
         $data = [
             'username' => 'admin_hospital',
             'email' => 'admin@hospital.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'facility' => $facilityData,
             'status' => 'active',
             'role' => 'facility_admin'

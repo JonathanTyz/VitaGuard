@@ -55,20 +55,20 @@ class ConsultationTest extends TestCase
     public function testSetEndTimeAcceptsValidEndTime(): void
     {
         $consultation = $this->createValidConsultation();
-        $endTime = Carbon::parse('2024-01-15 10:30:00');
-        $consultation->setEndTime($endTime);
+        $end_time = Carbon::parse('2024-01-15 10:30:00');
+        $consultation->setEndTime($end_time);
 
-        $this->assertSame($endTime, $consultation->getEndTime());
+        $this->assertSame($end_time, $consultation->getEndTime());
         $this->assertTrue($consultation->isClosed());
     }
 
     public function testSetPaidAt(): void
     {
         $consultation = $this->createValidConsultation();
-        $paidAt = Carbon::parse('2024-01-15 11:00:00');
-        $consultation->setPaidAt($paidAt);
+        $paid_at = Carbon::parse('2024-01-15 11:00:00');
+        $consultation->setPaidAt($paid_at);
 
-        $this->assertSame($paidAt, $consultation->getPaidAt());
+        $this->assertSame($paid_at, $consultation->getPaidAt());
     }
 
     public function testSetNotes(): void

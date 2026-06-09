@@ -15,39 +15,39 @@ class MedicalProfile
     #region PROPERTIES
     private int $id;
     private string $description;
-    private BloodType $bloodType;
+    private BloodType $blood_type;
     private float $height;
     private float $weight;
-    private SmokingStatus $smokingStatus;
-    private AlcoholConsumption $alcoholConsumption;
+    private SmokingStatus $smoking_status;
+    private AlcoholConsumption $alcohol_consumption;
     private User $creator;
     private Member $patient;
-    private Carbon $diagnosedDate;
+    private Carbon $diagnosed_date;
     #endregion
 
     #region CONSTRUCTOR
     public function __construct(
         int $id,
         string $description,
-        BloodType $bloodType,
+        BloodType $blood_type,
         float $height,
         float $weight,
-        SmokingStatus $smokingStatus,
-        AlcoholConsumption $alcoholConsumption,
+        SmokingStatus $smoking_status,
+        AlcoholConsumption $alcohol_consumption,
         User $creator,
         Member $patient,
-        Carbon $diagnosedDate
+        Carbon $diagnosed_date
     ) {
         $this->setId($id);
         $this->setDescription($description);
-        $this->setBloodType($bloodType);
+        $this->setBloodType($blood_type);
         $this->setHeight($height);
         $this->setWeight($weight);
-        $this->setSmokingStatus($smokingStatus);
-        $this->setAlcoholConsumption($alcoholConsumption);
+        $this->setSmokingStatus($smoking_status);
+        $this->setAlcoholConsumption($alcohol_consumption);
         $this->setCreator($creator);
         $this->setPatient($patient);
-        $this->setDiagnosedDate($diagnosedDate);
+        $this->setDiagnosedDate($diagnosed_date);
     }
     #endregion
 
@@ -64,7 +64,7 @@ class MedicalProfile
 
     public function getBloodType(): BloodType
     {
-        return $this->bloodType;
+        return $this->blood_type;
     }
 
     public function getHeight(): float
@@ -79,12 +79,12 @@ class MedicalProfile
 
     public function getSmokingStatus(): SmokingStatus
     {
-        return $this->smokingStatus;
+        return $this->smoking_status;
     }
 
     public function getAlcoholConsumption(): AlcoholConsumption
     {
-        return $this->alcoholConsumption;
+        return $this->alcohol_consumption;
     }
 
     public function getCreator(): User
@@ -99,7 +99,7 @@ class MedicalProfile
 
     public function getDiagnosedDate(): Carbon
     {
-        return $this->diagnosedDate;
+        return $this->diagnosed_date;
     }
     #endregion
 
@@ -122,7 +122,7 @@ class MedicalProfile
 
     public function setBloodType(BloodType $value): void
     {
-        $this->bloodType = $value;
+        $this->blood_type = $value;
     }
 
     public function setHeight(float $value): void
@@ -143,12 +143,12 @@ class MedicalProfile
 
     public function setSmokingStatus(SmokingStatus $value): void
     {
-        $this->smokingStatus = $value;
+        $this->smoking_status = $value;
     }
 
     public function setAlcoholConsumption(AlcoholConsumption $value): void
     {
-        $this->alcoholConsumption = $value;
+        $this->alcohol_consumption = $value;
     }
 
     public function setCreator(User $value): void
@@ -163,7 +163,7 @@ class MedicalProfile
 
     public function setDiagnosedDate(Carbon $value): void
     {
-        $this->diagnosedDate = $value;
+        $this->diagnosed_date = $value;
     }
     #endregion
 
@@ -173,14 +173,14 @@ class MedicalProfile
         return [
             'id'                 => $this->getId(),
             'description'        => $this->getDescription(),
-            'bloodType'          => $this->getBloodType()->value,
+            'blood_type'          => $this->getBloodType()->value,
             'height'             => $this->getHeight(),
             'weight'             => $this->getWeight(),
-            'smokingStatus'      => $this->getSmokingStatus()->value,
-            'alcoholConsumption' => $this->getAlcoholConsumption()->value,
+            'smoking_status'      => $this->getSmokingStatus()->value,
+            'alcohol_consumption' => $this->getAlcoholConsumption()->value,
             'creator'            => $this->getCreator()->toArray(),
             'patient'            => $this->getPatient()->toArray(),
-            'diagnosedDate'      => $this->getDiagnosedDate()->toDateTimeString(),
+            'diagnosed_date'      => $this->getDiagnosedDate()->toDateTimeString(),
         ];
     }
 
@@ -195,14 +195,14 @@ class MedicalProfile
         return new self(
             (int) $data['id'],
             $data['description'],
-            BloodType::from($data['bloodType']),
+            BloodType::from($data['blood_type']),
             (float) $data['height'],
             (float) $data['weight'],
-            SmokingStatus::from($data['smokingStatus']),
-            AlcoholConsumption::from($data['alcoholConsumption']),
+            SmokingStatus::from($data['smoking_status']),
+            AlcoholConsumption::from($data['alcohol_consumption']),
             User::fromArray($data['creator']), 
             Member::fromArray($data['patient']),
-            Carbon::parse($data['diagnosedDate'])
+            Carbon::parse($data['diagnosed_date'])
         );
     }
     #endregion

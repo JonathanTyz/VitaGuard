@@ -14,7 +14,7 @@ class MedicalHistory
     private string $description;
     private User $creator;
     private Member $patient;
-    private Carbon $diagnosedDate;
+    private Carbon $diagnosed_date;
     #endregion
 
     #region CONSTRUCTOR
@@ -23,13 +23,13 @@ class MedicalHistory
         string $description,
         User $creator,
         Member $patient,
-        Carbon $diagnosedDate
+        Carbon $diagnosed_date
     ) {
         $this->setId($id);
         $this->setDescription($description);
         $this->setCreator($creator);
         $this->setPatient($patient);
-        $this->setDiagnosedDate($diagnosedDate);
+        $this->setDiagnosedDate($diagnosed_date);
     }
     #endregion
 
@@ -56,7 +56,7 @@ class MedicalHistory
 
     public function getDiagnosedDate(): Carbon
     {
-        return $this->diagnosedDate;
+        return $this->diagnosed_date;
     }
     #endregion
 
@@ -89,7 +89,7 @@ class MedicalHistory
 
     public function setDiagnosedDate(Carbon $value): void
     {
-        $this->diagnosedDate = $value;
+        $this->diagnosed_date = $value;
     }
     #endregion
 
@@ -101,7 +101,7 @@ class MedicalHistory
             'description'   => $this->getDescription(),
             'creator'       => $this->getCreator()->toArray(),
             'patient'       => $this->getPatient()->toArray(),
-            'diagnosedDate' => $this->getDiagnosedDate()->toDateTimeString(),
+            'diagnosed_date' => $this->getDiagnosedDate()->toDateTimeString(),
         ];
     }
 
@@ -118,7 +118,7 @@ class MedicalHistory
             $data['description'],
             User::fromArray($data['creator']), 
             Member::fromArray($data['patient']),
-            Carbon::parse($data['diagnosedDate'])
+            Carbon::parse($data['diagnosed_date'])
         );
     }
     #endregion

@@ -14,11 +14,11 @@ use InvalidArgumentException;
 class Member extends User
 {
     #region PROPERTIES
-    private string $firstName;
-    private string $middleName;
-    private string $lastName;
+    private string $first_name;
+    private string $middle_name;
+    private string $last_name;
     private Gender $gender;
-    private Carbon $dateOfBirth;
+    private Carbon $date_of_birth;
     private Address $address;
     #endregion
 
@@ -26,21 +26,21 @@ class Member extends User
     public function __construct(
         string $username,
         string $email,
-        string $phoneNumber,
+        string $phone_number,
         Status $status,
-        string $firstName,
-        string $middleName,
-        string $lastName,
+        string $first_name,
+        string $middle_name,
+        string $last_name,
         Gender $gender,
-        Carbon $dateOfBirth,
+        Carbon $date_of_birth,
         Address $address
     ) {
-        parent::__construct($username, $email, $phoneNumber, Role::MEMBER, $status);
-        $this->setFirstName($firstName);
-        $this->setMiddleName($middleName);
-        $this->setLastName($lastName);
+        parent::__construct($username, $email, $phone_number, Role::MEMBER, $status);
+        $this->setFirstName($first_name);
+        $this->setMiddleName($middle_name);
+        $this->setLastName($last_name);
         $this->setGender($gender);
-        $this->setDateOfBirth($dateOfBirth);
+        $this->setDateOfBirth($date_of_birth);
         $this->setAddress($address);
     }
     #endregion
@@ -48,17 +48,17 @@ class Member extends User
     #region GETTERS
     public function getFirstName(): string
     {
-        return $this->firstName;
+        return $this->first_name;
     }
 
     public function getMiddleName(): string
     {
-        return $this->middleName;
+        return $this->middle_name;
     }
 
     public function getLastName(): string
     {
-        return $this->lastName;
+        return $this->last_name;
     }
 
     public function getGender(): Gender
@@ -68,7 +68,7 @@ class Member extends User
 
     public function getDateOfBirth(): Carbon
     {
-        return $this->dateOfBirth;
+        return $this->date_of_birth;
     }
 
     public function getAddress(): Address
@@ -86,7 +86,7 @@ class Member extends User
         if (mb_strlen($value) > config('data.max_name_length')) {
             throw new InvalidArgumentException('First name cannot exceed ' . config('data.max_name_length') . ' characters.');
         }
-        $this->firstName = $value;
+        $this->first_name = $value;
     }
 
     public function setMiddleName(string $value): void
@@ -94,7 +94,7 @@ class Member extends User
         if (mb_strlen($value) > config('data.max_name_length')) {
             throw new InvalidArgumentException('Middle name cannot exceed ' . config('data.max_name_length') . ' characters.');
         }
-        $this->middleName = $value;
+        $this->middle_name = $value;
     }
 
     public function setLastName(string $value): void
@@ -105,7 +105,7 @@ class Member extends User
         if (mb_strlen($value) > config('data.max_name_length')) {
             throw new InvalidArgumentException('Last name cannot exceed ' . config('data.max_name_length') . ' characters.');
         }
-        $this->lastName = $value;
+        $this->last_name = $value;
     }
 
     public function setGender(Gender $value): void
@@ -115,7 +115,7 @@ class Member extends User
 
     public function setDateOfBirth(Carbon $value): void
     {
-        $this->dateOfBirth = $value;
+        $this->date_of_birth = $value;
     }
 
     public function setAddress(Address $value): void
@@ -128,11 +128,11 @@ class Member extends User
     public function toArray(): array
     {
         return array_merge(parent::toArray(), [
-            'firstName' => $this->getFirstName(),
-            'middleName' => $this->getMiddleName(),
-            'lastName' => $this->getLastName(),
+            'first_name' => $this->getFirstName(),
+            'middle_name' => $this->getMiddleName(),
+            'last_name' => $this->getLastName(),
             'gender' => $this->getGender()->value,
-            'dateOfBirth' => $this->getDateOfBirth()->toDateTimeString(),
+            'date_of_birth' => $this->getDateOfBirth()->toDateTimeString(),
             'address' => $this->getAddress()->toArray(),
         ]);
     }
@@ -148,13 +148,13 @@ class Member extends User
         return new self(
             $data['username'],
             $data['email'],
-            $data['phoneNumber'],
+            $data['phone_number'],
             Status::from($data['status']),
-            $data['firstName'],
-            $data['middleName'],
-            $data['lastName'],
+            $data['first_name'],
+            $data['middle_name'],
+            $data['last_name'],
             Gender::from($data['gender']),
-            Carbon::parse($data['dateOfBirth']),
+            Carbon::parse($data['date_of_birth']),
             Address::fromArray($data['address'])
         );
     }

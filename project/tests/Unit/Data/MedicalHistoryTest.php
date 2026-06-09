@@ -119,7 +119,7 @@ class MedicalHistoryTest extends TestCase
         $this->assertArrayHasKey('description', $array);
         $this->assertArrayHasKey('creator', $array);
         $this->assertArrayHasKey('patient', $array);
-        $this->assertArrayHasKey('diagnosedDate', $array);
+        $this->assertArrayHasKey('diagnosed_date', $array);
         $this->assertEquals(1, $array['id']);
         $this->assertEquals('Patient has history of hypertension', $array['description']);
     }
@@ -142,28 +142,28 @@ class MedicalHistoryTest extends TestCase
         $creatorData = [
             'username' => 'doctor_user',
             'email' => 'doctor@example.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'role' => 'member',
             'status' => 'active',
-            'firstName' => 'Jane',
-            'middleName' => '',
-            'lastName' => 'Smith',
+            'first_name' => 'Jane',
+            'middle_name' => '',
+            'last_name' => 'Smith',
             'gender' => 'female',
-            'dateOfBirth' => '1985-01-01 00:00:00',
+            'date_of_birth' => '1985-01-01 00:00:00',
             'address' => $addressData
         ];
 
         $patientData = [
             'username' => 'john_doe',
             'email' => 'john@example.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'role' => 'member',
             'status' => 'active',
-            'firstName' => 'John',
-            'middleName' => '',
-            'lastName' => 'Doe',
+            'first_name' => 'John',
+            'middle_name' => '',
+            'last_name' => 'Doe',
             'gender' => 'male',
-            'dateOfBirth' => '1990-01-01 00:00:00',
+            'date_of_birth' => '1990-01-01 00:00:00',
             'address' => $addressData
         ];
 
@@ -172,7 +172,7 @@ class MedicalHistoryTest extends TestCase
             'description' => 'Hypertension history',
             'creator' => $creatorData,
             'patient' => $patientData,
-            'diagnosedDate' => '2020-01-15 00:00:00'
+            'diagnosed_date' => '2020-01-15 00:00:00'
         ];
 
         $history = MedicalHistory::fromArray($data);

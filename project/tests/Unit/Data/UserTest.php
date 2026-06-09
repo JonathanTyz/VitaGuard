@@ -23,7 +23,7 @@ class TestUser extends User
         return new self(
             $data['username'],
             $data['email'],
-            $data['phoneNumber'],
+            $data['phone_number'],
             Role::from($data['role']),
             Status::from($data['status'])
         );
@@ -101,7 +101,7 @@ class UserTest extends TestCase
 
         $this->assertArrayHasKey('username', $array);
         $this->assertArrayHasKey('email', $array);
-        $this->assertArrayHasKey('phoneNumber', $array);
+        $this->assertArrayHasKey('phone_number', $array);
         $this->assertArrayHasKey('role', $array);
         $this->assertArrayHasKey('status', $array);
         $this->assertEquals('testuser', $array['username']);
@@ -116,14 +116,14 @@ class UserTest extends TestCase
         $memberData = [
             'username' => 'member1',
             'email' => 'member@example.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'role' => 'member',
             'status' => 'active',
-            'firstName' => 'John',
-            'middleName' => '',
-            'lastName' => 'Doe',
+            'first_name' => 'John',
+            'middle_name' => '',
+            'last_name' => 'Doe',
             'gender' => 'male',
-            'dateOfBirth' => '1990-01-01 00:00:00',
+            'date_of_birth' => '1990-01-01 00:00:00',
             'address' => [
                 'detail' => '123 Test St',
                 'district' => [

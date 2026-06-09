@@ -15,14 +15,14 @@ use InvalidArgumentException;
 class Doctor extends User
 {
     #region PROPERTIES
-    private string $prefixName;
-    private string $firstName;
-    private string $middleName;
-    private string $lastName;
-    private string $suffixName;
+    private string $prefix_name;
+    private string $first_name;
+    private string $middle_name;
+    private string $last_name;
+    private string $suffix_name;
     private float $rating;
     private Gender $gender;
-    private Carbon $dateOfBirth;
+    private Carbon $date_of_birth;
     private Address $address;
     private array $specialties=[];
     #endregion
@@ -31,28 +31,28 @@ class Doctor extends User
     public function __construct(
         string $username,
         string $email,
-        string $phoneNumber,
+        string $phone_number,
         Status $status,
-        string $prefixName,
-        string $firstName,
-        string $middleName,
-        string $lastName,
-        string $suffixName,
+        string $prefix_name,
+        string $first_name,
+        string $middle_name,
+        string $last_name,
+        string $suffix_name,
         float $rating,
         Gender $gender,
-        Carbon $dateOfBirth,
+        Carbon $date_of_birth,
         Address $address,
         array $specialties
     ) {
-        parent::__construct($username, $email, $phoneNumber, Role::DOCTOR, $status);
-        $this->setPrefixName($prefixName);
-        $this->setFirstName($firstName);
-        $this->setMiddleName($middleName);
-        $this->setLastName($lastName);
-        $this->setSuffixName($suffixName);
+        parent::__construct($username, $email, $phone_number, Role::DOCTOR, $status);
+        $this->setPrefixName($prefix_name);
+        $this->setFirstName($first_name);
+        $this->setMiddleName($middle_name);
+        $this->setLastName($last_name);
+        $this->setSuffixName($suffix_name);
         $this->setRating($rating);
         $this->setGender($gender);
-        $this->setDateOfBirth($dateOfBirth);
+        $this->setDateOfBirth($date_of_birth);
         $this->setAddress($address);
         $this->setSpecialties($specialties);
     }
@@ -61,27 +61,27 @@ class Doctor extends User
     #region GETTERS
     public function getPrefixName(): string
     {
-        return $this->prefixName;
+        return $this->prefix_name;
     }
 
     public function getFirstName(): string
     {
-        return $this->firstName;
+        return $this->first_name;
     }
 
     public function getMiddleName(): string
     {
-        return $this->middleName;
+        return $this->middle_name;
     }
 
     public function getLastName(): string
     {
-        return $this->lastName;
+        return $this->last_name;
     }
 
     public function getSuffixName(): string
     {
-        return $this->suffixName;
+        return $this->suffix_name;
     }
 
     public function getRating(): float
@@ -96,7 +96,7 @@ class Doctor extends User
 
     public function getDateOfBirth(): Carbon
     {
-        return $this->dateOfBirth;
+        return $this->date_of_birth;
     }
 
     public function getAddress(): Address
@@ -122,7 +122,7 @@ class Doctor extends User
         if (mb_strlen($value) > config('data.max_name_length')) {
             throw new InvalidArgumentException('Prefix name cannot exceed ' . config('data.max_name_length') . ' characters.');
         }
-        $this->prefixName = $value;
+        $this->prefix_name = $value;
     }
 
     public function setFirstName(string $value): void
@@ -133,7 +133,7 @@ class Doctor extends User
         if (mb_strlen($value) > config('data.max_name_length')) {
             throw new InvalidArgumentException('First name cannot exceed ' . config('data.max_name_length') . ' characters.');
         }
-        $this->firstName = $value;
+        $this->first_name = $value;
     }
 
     public function setMiddleName(string $value): void
@@ -141,7 +141,7 @@ class Doctor extends User
         if (mb_strlen($value) > config('data.max_name_length')) {
             throw new InvalidArgumentException('Middle name cannot exceed ' . config('data.max_name_length') . ' characters.');
         }
-        $this->middleName = $value;
+        $this->middle_name = $value;
     }
 
     public function setLastName(string $value): void
@@ -152,7 +152,7 @@ class Doctor extends User
         if (mb_strlen($value) > config('data.max_name_length')) {
             throw new InvalidArgumentException('Last name cannot exceed ' . config('data.max_name_length') . ' characters.');
         }
-        $this->lastName = $value;
+        $this->last_name = $value;
     }
 
     public function setSuffixName(string $value): void
@@ -160,7 +160,7 @@ class Doctor extends User
         if (mb_strlen($value) > config('data.max_name_length')) {
             throw new InvalidArgumentException('Suffix name cannot exceed ' . config('data.max_name_length') . ' characters.');
         }
-        $this->suffixName = $value;
+        $this->suffix_name = $value;
     }
 
     public function setRating(float $value): void
@@ -178,7 +178,7 @@ class Doctor extends User
 
     public function setDateOfBirth(Carbon $value): void
     {
-        $this->dateOfBirth = $value;
+        $this->date_of_birth = $value;
     }
 
     public function setAddress(Address $value): void
@@ -203,14 +203,14 @@ class Doctor extends User
     public function toArray(): array
     {
         return array_merge(parent::toArray(), [
-            'prefixName' => $this->getPrefixName(),
-            'firstName' => $this->getFirstName(),
-            'middleName' => $this->getMiddleName(),
-            'lastName' => $this->getLastName(),
-            'suffixName' => $this->getSuffixName(),
+            'prefix_name' => $this->getPrefixName(),
+            'first_name' => $this->getFirstName(),
+            'middle_name' => $this->getMiddleName(),
+            'last_name' => $this->getLastName(),
+            'suffix_name' => $this->getSuffixName(),
             'rating' => $this->getRating(),
             'gender' => $this->getGender()->value,
-            'dateOfBirth' => $this->getDateOfBirth()->toDateTimeString(),
+            'date_of_birth' => $this->getDateOfBirth()->toDateTimeString(),
             'address' => $this->getAddress()->toArray(),
             'specialties' => array_map(fn(Specialty $specialty) => $specialty->toArray(), $this->getSpecialties())
         ]);
@@ -227,16 +227,16 @@ class Doctor extends User
         return new self(
             $data['username'],
             $data['email'],
-            $data['phoneNumber'],
+            $data['phone_number'],
             Status::from($data['status']),
-            $data['prefixName'],
-            $data['firstName'],
-            $data['middleName'],
-            $data['lastName'],
-            $data['suffixName'],
+            $data['prefix_name'],
+            $data['first_name'],
+            $data['middle_name'],
+            $data['last_name'],
+            $data['suffix_name'],
             (float) $data['rating'],
             Gender::from($data['gender']),
-            Carbon::parse($data['dateOfBirth']),
+            Carbon::parse($data['date_of_birth']),
             Address::fromArray($data['address']),
             $data['specialties']
         );

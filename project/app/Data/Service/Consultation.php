@@ -9,25 +9,25 @@ class Consultation
 {
     #region FIELDS
     private int $id;
-    private Carbon $startTime;
-    private ?Carbon $endTime;
+    private Carbon $start_time;
+    private ?Carbon $end_time;
     private string $notes;
-    private ?Carbon $paidAt;
+    private ?Carbon $paid_at;
     #endregion
 
     #region CONSTRUCTOR
     public function __construct(
         int $id,
-        Carbon $startTime,
+        Carbon $start_time,
         string $notes,
-        ?Carbon $endTime = null,
-        ?Carbon $paidAt = null
+        ?Carbon $end_time = null,
+        ?Carbon $paid_at = null
     ) {
         $this->setId($id);
-        $this->setStartTime($startTime);
+        $this->setStartTime($start_time);
         $this->setNotes($notes);
-        $this->setEndTime($endTime);
-        $this->setPaidAt($paidAt);
+        $this->setEndTime($end_time);
+        $this->setPaidAt($paid_at);
     }
     #endregion
 
@@ -39,12 +39,12 @@ class Consultation
 
     public function getStartTime(): Carbon
     {
-        return $this->startTime;
+        return $this->start_time;
     }
 
     public function getEndTime(): ?Carbon
     {
-        return $this->endTime;
+        return $this->end_time;
     }
 
     public function getNotes(): string
@@ -54,12 +54,12 @@ class Consultation
 
     public function getPaidAt(): ?Carbon
     {
-        return $this->paidAt;
+        return $this->paid_at;
     }
 
     public function isClosed(): bool
     {
-        if ($this->endTime === null) {
+        if ($this->end_time === null) {
             return false;
         } else {
             return true;
@@ -75,15 +75,15 @@ class Consultation
 
     public function setStartTime(Carbon $value): void
     {
-        $this->startTime = $value;
+        $this->start_time = $value;
     }
 
     public function setEndTime(?Carbon $value): void
     {
-        if ($value !== null && $value <= $this->startTime) {
+        if ($value !== null && $value <= $this->start_time) {
             throw new InvalidArgumentException("End time must be after start time.");
         }
-        $this->endTime = $value;
+        $this->end_time = $value;
     }
 
     public function setNotes(string $value): void
@@ -93,7 +93,7 @@ class Consultation
 
     public function setPaidAt(?Carbon $value): void
     {
-        $this->paidAt = $value;
+        $this->paid_at = $value;
     }
     #endregion
 

@@ -13,8 +13,8 @@ class Article
     private User $creator;
     private Topic $topic;
     private string $content;
-    private Carbon $createdAt;
-    private Carbon $updatedAt;
+    private Carbon $created_at;
+    private Carbon $updated_at;
     #endregion
 
     #region CONSTRUCTOR
@@ -22,14 +22,14 @@ class Article
         User $creator,
         Topic $topic,
         string $content,
-        ?Carbon $createdAt = null,
-        ?Carbon $updatedAt = null
+        ?Carbon $created_at = null,
+        ?Carbon $updated_at = null
     ) {
         $this->setCreator($creator);
         $this->setTopic($topic);
         $this->setContent($content);
-        $this->setCreatedAt($createdAt ?? Carbon::now());
-        $this->setUpdatedAt($updatedAt ?? Carbon::now());
+        $this->setCreatedAt($created_at ?? Carbon::now());
+        $this->setUpdatedAt($updated_at ?? Carbon::now());
     }
     #endregion
 
@@ -51,12 +51,12 @@ class Article
 
     public function getCreatedAt(): Carbon
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     public function getUpdatedAt(): Carbon
     {
-        return $this->updatedAt;
+        return $this->updated_at;
     }
     #endregion
 
@@ -79,14 +79,14 @@ class Article
         $this->content = $content;
     }
 
-    public function setCreatedAt(Carbon $createdAt): void
+    public function setCreatedAt(Carbon $created_at): void
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = $created_at;
     }
 
-    public function setUpdatedAt(Carbon $updatedAt): void
+    public function setUpdatedAt(Carbon $updated_at): void
     {
-        $this->updatedAt = $updatedAt;
+        $this->updated_at = $updated_at;
     }
     #endregion
 
@@ -97,8 +97,8 @@ class Article
             'creator'    => $this->creator->toArray(), 
             'topic'      => $this->topic->toArray(),
             'content'    => $this->content,
-            'createdAt' => $this->createdAt->toDateTimeString(),
-            'updatedAt' => $this->updatedAt->toDateTimeString(),
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
         ];
     }
 
@@ -114,8 +114,8 @@ class Article
             User::fromArray($data['creator']), 
             Topic::fromArray($data['topic']),
             $data['content'] ?? '',
-            Carbon::parse($data['createdAt']),
-            Carbon::parse($data['updatedAt'])
+            Carbon::parse($data['created_at']),
+            Carbon::parse($data['updated_at'])
         );
     }
     #endregion

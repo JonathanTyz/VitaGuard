@@ -155,14 +155,14 @@ class MemberAllergenTest extends TestCase
         $creatorData = [
             'username' => 'doctor_user',
             'email' => 'doctor@example.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'role' => 'member',
             'status' => 'active',
-            'firstName' => 'John',
-            'middleName' => '',
-            'lastName' => 'Doe',
+            'first_name' => 'John',
+            'middle_name' => '',
+            'last_name' => 'Doe',
             'gender' => 'male',
-            'dateOfBirth' => '1980-01-01 00:00:00',
+            'date_of_birth' => '1980-01-01 00:00:00',
             'address' => $addressData
         ];
 

@@ -179,7 +179,7 @@ class WeeklyScheduleTest extends TestCase
             'id' => 1,
             'name' => 'Test Hospital',
             'address' => $addressData,
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'rating' => 4.5
         ];
 

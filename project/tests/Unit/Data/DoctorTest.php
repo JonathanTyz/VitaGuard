@@ -179,16 +179,16 @@ class DoctorTest extends TestCase
 
         $this->assertArrayHasKey('username', $array);
         $this->assertArrayHasKey('email', $array);
-        $this->assertArrayHasKey('prefixName', $array);
-        $this->assertArrayHasKey('firstName', $array);
-        $this->assertArrayHasKey('lastName', $array);
+        $this->assertArrayHasKey('prefix_name', $array);
+        $this->assertArrayHasKey('first_name', $array);
+        $this->assertArrayHasKey('last_name', $array);
         $this->assertArrayHasKey('rating', $array);
         $this->assertArrayHasKey('gender', $array);
-        $this->assertArrayHasKey('dateOfBirth', $array);
+        $this->assertArrayHasKey('date_of_birth', $array);
         $this->assertArrayHasKey('address', $array);
         $this->assertEquals('dr_john', $array['username']);
-        $this->assertEquals('Dr.', $array['prefixName']);
-        $this->assertEquals('John', $array['firstName']);
+        $this->assertEquals('Dr.', $array['prefix_name']);
+        $this->assertEquals('John', $array['first_name']);
     }
 
     public function testFromArrayCreatesValidDoctor(): void
@@ -209,16 +209,16 @@ class DoctorTest extends TestCase
         $data = [
             'username' => 'dr_john',
             'email' => 'dr.john@example.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'status' => 'active',
-            'prefixName' => 'Dr.',
-            'firstName' => 'John',
-            'middleName' => 'Michael',
-            'lastName' => 'Doe',
-            'suffixName' => 'Jr.',
+            'prefix_name' => 'Dr.',
+            'first_name' => 'John',
+            'middle_name' => 'Michael',
+            'last_name' => 'Doe',
+            'suffix_name' => 'Jr.',
             'rating' => '4.5',
             'gender' => 'male',
-            'dateOfBirth' => '1980-05-15 00:00:00',
+            'date_of_birth' => '1980-05-15 00:00:00',
             'address' => $addressData,
             'specialties' => [],
             'role' => 'doctor'

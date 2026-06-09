@@ -12,10 +12,10 @@ class Admin extends User
     public function __construct(
         string $username,
         string $email,
-        string $phoneNumber,
+        string $phone_number,
         Status $status = Status::ACTIVE
     ) {
-        parent::__construct($username, $email, $phoneNumber, Role::ADMIN, $status);
+        parent::__construct($username, $email, $phone_number, Role::ADMIN, $status);
     }
     #endregion
 
@@ -36,7 +36,7 @@ class Admin extends User
         return new self(
             $data['username'],
             $data['email'],
-            $data['phoneNumber'],
+            $data['phone_number'],
             Status::from($data['status'])
         );
     }

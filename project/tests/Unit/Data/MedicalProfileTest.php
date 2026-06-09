@@ -152,16 +152,16 @@ class MedicalProfileTest extends TestCase
 
         $this->assertArrayHasKey('id', $array);
         $this->assertArrayHasKey('description', $array);
-        $this->assertArrayHasKey('bloodType', $array);
+        $this->assertArrayHasKey('blood_type', $array);
         $this->assertArrayHasKey('height', $array);
         $this->assertArrayHasKey('weight', $array);
-        $this->assertArrayHasKey('smokingStatus', $array);
-        $this->assertArrayHasKey('alcoholConsumption', $array);
+        $this->assertArrayHasKey('smoking_status', $array);
+        $this->assertArrayHasKey('alcohol_consumption', $array);
         $this->assertArrayHasKey('creator', $array);
         $this->assertArrayHasKey('patient', $array);
-        $this->assertArrayHasKey('diagnosedDate', $array);
+        $this->assertArrayHasKey('diagnosed_date', $array);
         $this->assertEquals(1, $array['id']);
-        $this->assertEquals('O+', $array['bloodType']);
+        $this->assertEquals('O+', $array['blood_type']);
     }
 
     public function testFromArrayCreatesValidMedicalProfile(): void
@@ -182,42 +182,42 @@ class MedicalProfileTest extends TestCase
         $creatorData = [
             'username' => 'doctor_user',
             'email' => 'doctor@example.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'role' => 'member',
             'status' => 'active',
-            'firstName' => 'Jane',
-            'middleName' => '',
-            'lastName' => 'Smith',
+            'first_name' => 'Jane',
+            'middle_name' => '',
+            'last_name' => 'Smith',
             'gender' => 'female',
-            'dateOfBirth' => '1985-01-01 00:00:00',
+            'date_of_birth' => '1985-01-01 00:00:00',
             'address' => $addressData
         ];
 
         $patientData = [
             'username' => 'john_doe',
             'email' => 'john@example.com',
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'role' => 'member',
             'status' => 'active',
-            'firstName' => 'John',
-            'middleName' => '',
-            'lastName' => 'Doe',
+            'first_name' => 'John',
+            'middle_name' => '',
+            'last_name' => 'Doe',
             'gender' => 'male',
-            'dateOfBirth' => '1990-01-01 00:00:00',
+            'date_of_birth' => '1990-01-01 00:00:00',
             'address' => $addressData
         ];
 
         $data = [
             'id' => 1,
             'description' => 'Patient health profile',
-            'bloodType' => 'O+',
+            'blood_type' => 'O+',
             'height' => 175.5,
             'weight' => 72.3,
-            'smokingStatus' => 'never',
-            'alcoholConsumption' => 'light',
+            'smoking_status' => 'never',
+            'alcohol_consumption' => 'light',
             'creator' => $creatorData,
             'patient' => $patientData,
-            'diagnosedDate' => '2024-01-15 00:00:00'
+            'diagnosed_date' => '2024-01-15 00:00:00'
         ];
 
         $profile = MedicalProfile::fromArray($data);

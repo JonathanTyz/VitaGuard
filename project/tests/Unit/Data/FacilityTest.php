@@ -96,11 +96,11 @@ class FacilityTest extends TestCase
         $this->assertArrayHasKey('id', $array);
         $this->assertArrayHasKey('name', $array);
         $this->assertArrayHasKey('address', $array);
-        $this->assertArrayHasKey('phoneNumber', $array);
+        $this->assertArrayHasKey('phone_number', $array);
         $this->assertArrayHasKey('rating', $array);
         $this->assertEquals(1, $array['id']);
         $this->assertEquals('Test Hospital', $array['name']);
-        $this->assertEquals('+9171234567', $array['phoneNumber']);
+        $this->assertEquals('+9171234567', $array['phone_number']);
         $this->assertEquals(4.5, $array['rating']);
     }
 
@@ -126,7 +126,7 @@ class FacilityTest extends TestCase
             'id' => '1',
             'name' => 'Test Hospital',
             'address' => $addressData,
-            'phoneNumber' => '+9171234567',
+            'phone_number' => '+9171234567',
             'rating' => '4.5'
         ];
 

@@ -7,26 +7,23 @@ require_once("VitaGuardSeeder.php");
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class AppointmentSeeder extends VitaGuardSeeder
+class DoctorScheduleSeeder extends VitaGuardSeeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $this->tableName = 'appointments';
-        $this->runVitaGuardSeeder('appointments.csv');
+        $this->tableName = 'doctor_schedules';
+        $this->runVitaGuardSeeder('doctor_schedules.csv');
     }
 
     protected function modifyData($dataArray): array
     {
-        $nullableDatetimeFields = [
-            'check_in_time',
-            'completed_time',
-            'deleted_at',
+        $nullableFields = [
+            'break_start_time',
+            'break_end_time',
+            'notes',
         ];
 
-        foreach ($nullableDatetimeFields as $field) {
+        foreach ($nullableFields as $field) {
             if (isset($dataArray[$field]) && trim($dataArray[$field]) === '') {
                 $dataArray[$field] = null;
             }

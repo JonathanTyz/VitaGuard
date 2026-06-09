@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 require_once("VitaGuardSeeder.php");
-class FacilityHoursSeeder extends VitaGuardSeeder
+class FacilityScheduleSeeder extends VitaGuardSeeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,8 @@ class FacilityHoursSeeder extends VitaGuardSeeder
     public function run(): void
     {
         //
-        $this->tableName = 'facility_hours';
-        $this->runVitaGuardSeeder('facility_hours.csv');
+        $this->tableName = 'facility_schedules';
+        $this->runVitaGuardSeeder('facility_schedules.csv');
     }
 
     protected function modifyData($dataArray):array

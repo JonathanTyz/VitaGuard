@@ -38,8 +38,11 @@ return new class extends Migration {
     /**
      * Reverse the migrations.
      */
+    // Apply to every migration's down() that might have dependents
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('users');
+        Schema::enableForeignKeyConstraints();
     }
 };

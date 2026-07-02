@@ -83,20 +83,19 @@
                                 let topicName = article.topic.name || '-';
 
                                 rowsHtml += `
-                                                    <tr id="tr_${article.id}">
-                                                        <td class="text-center">${article.id}</td>
-                                                        <td><strong>${article.title}</strong></td>
-                                                        <td>${creatorName}</td>
-                                                        <td>${topicName}</td>
-                                                        <td class="text-center">
-                                                            <a href="/admin/articles/${article.id}/show" class="btn btn-sm btn-warning text-white">Detail</a>
-                                                            <a href="/admin/articles/${article.id}/edit" class="btn btn-sm btn-info text-white">Edit</a>
-                                                            <button type="button" class="btn btn-sm btn-danger text-white btn-delete" data-id="${article.id}">
-                                                                    Delete
-                                                            </button>                    
-                                                        </td>
-                                                    </tr>
-                                                `;
+                                    <tr id="tr_${article.id}">
+                                        <td class="text-center">${article.id}</td>
+                                        <td><strong>${article.title}</strong></td>
+                                        <td>${creatorName}</td>
+                                        <td>${topicName}</td>
+                                        <td class="text-center">
+                                            <a href="/portal/articles/${article.id}/show" class="btn btn-sm btn-warning text-white">Detail</a>                                            
+                                            <button type="button" class="btn btn-sm btn-danger text-white btn-delete" data-id="${article.id}">
+                                                    Delete
+                                            </button>                    
+                                        </td>
+                                    </tr>
+                                `;
                             });
 
                             // 3. Masukkan rakitan baris ke dalam tbody
@@ -142,7 +141,7 @@
                         btn.html(originalText).prop('disabled', false);
                         $('#modalDeleteArticle').modal('hide');
 
-                        if (response.success) {                            
+                        if (response.success) {
                             $('#tr_' + articleToDelete).fadeOut(300, function () {
                                 $(this).remove();
                             });

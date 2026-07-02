@@ -14,7 +14,7 @@ class ArticlePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class ArticlePolicy
      */
     public function view(User $user, Article $article): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class ArticlePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role === Role::ADMIN->value || $user->role === Role::DOCTOR->value;
     }
 
     /**
@@ -42,7 +42,12 @@ class ArticlePolicy
             return true;
         }
 
-        return $user->username === $article->creator;
+        // only can updated own article
+        if ($user->role === Role::DOCTOR->value) {
+            return $user->username === $article->creator;
+        }
+
+        return false;
     }
 
     /**
@@ -53,8 +58,12 @@ class ArticlePolicy
         if ($user->role === Role::ADMIN->value) {
             return true;
         }
+        
+        if ($user->role === Role::DOCTOR->value) {
+            return $user->username === $article->creator;
+        }
 
-        return $user->username === $article->creator;
+        return false;
     }
 
     /**

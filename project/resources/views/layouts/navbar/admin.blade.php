@@ -52,6 +52,8 @@
         href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
         integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4="
         crossorigin="anonymous" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -200,7 +202,11 @@
                             <!--begin::Menu Footer-->
                             <li class="user-footer">
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-default btn-flat float-end">Sign out</button>
+                                </form>
                             </li>
                             <!--end::Menu Footer-->
                         </ul>
@@ -249,7 +255,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/articles" class="nav-link {{ Request::is('admin/articles') ? 'active' : '' }}">
+                            <a href="/portal/articles" class="nav-link {{ Request::is('portal/articles') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-chat-heart"></i>
                                 <p>Articles</p>
                             </a>

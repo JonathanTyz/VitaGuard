@@ -55,6 +55,21 @@ class HomeController extends Controller
         return view('pages.welcome', compact('articles'));
     }
 
+    public function adminDashboard()
+    {
+        return response()->json([
+            'totalDoctor' => Doctor::count(),
+            'totalMember' => Member::count(),
+            'totalArticle' => Article::count(),
+            'totalAppointment' => Appointment::count(),
+            'totalOngoingConsultation' => Consultation::whereNotNull('start_time')
+                ->whereNull('end_time')
+                ->count(),
+            'totalCompletedConsultation' => Consultation::whereNotNull('end_time')
+                ->count()
+        ]);
+    }
+
     public function fetchAdminTable($tableName)
     {
         $hiddenTables = ['migrations', 'failed_jobs', 'password_reset_tokens', 'personal_access_tokens', 'sessions'];
@@ -65,7 +80,7 @@ class HomeController extends Controller
                 'message' => 'Data tabel tidak ditemukan atau akses ditolak.'
             ], 404);
         }
-       
+
         $data = DB::table($tableName)->get();
 
         return response()->json([
@@ -102,5 +117,5 @@ class HomeController extends Controller
             'success' => true,
             'data' => $tables
         ]);
-    }   
+    }
 }

@@ -64,8 +64,9 @@ class ConsultationController extends Controller
         }
 
         $specialties = Specialty::all();
+        $schedules = DoctorSchedule::all();
 
-        return view('pages.consultations.index', compact('doctors', 'specialties'));
+        return view('pages.consultations.index', compact('doctors', 'specialties', 'schedules'));
     }
 
 
@@ -94,90 +95,58 @@ class ConsultationController extends Controller
         return view('pages.consultations.doctor');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function start(Doctor $doctor)
     {
-        if (!Auth::check()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Anda harus login terlebih dahulu untuk melakukan booking.'
-            ], 401);
-        }
+    $patient = auth()->user()->username;
 
-        $request->validate([
-            'doctor_id'   => 'required|exists:doctors,username',
-            'schedule_id' => 'required|exists:doctor_schedules,id',
-            'date'        => 'required|date|after_or_equal:today',
-            'notes'       => 'nullable|string|max:255',
-        ]);
+    $existing = Consultation::where('patient', $patient)
+        ->whereHas('onlineSession', function ($q) use ($doctor) {
+            $q->where('doctor', $doctor->username);
+        })
+        ->whereNull('end_time')
+        ->first();
 
-        $patientUsername = Auth::user()->username;
+    if ($existing) {
+        return redirect()->route('chat', $existing->id);
+    }
 
-        $existingAppointment = Appointment::where('patient', $patientUsername)
-            ->where('doctor_schedule_id', $request->schedule_id)
-            ->whereDate('date', $request->date)
-            ->where('status', '!=', 'cancelled')
-            ->first();
-
-        if ($existingAppointment) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Anda sudah melakukan booking untuk jadwal dan tanggal ini.'
-            ], 422);
-        }
-
-        DB::beginTransaction();
-        try {
-            $schedule = DoctorSchedule::findOrFail($request->schedule_id);
-
-            $queueOrder = Appointment::where('doctor_schedule_id', $schedule->id)
-                ->whereDate('date', $request->date)
-                ->count() + 1;
-
-            $appointment = Appointment::create([
-                'patient'            => $patientUsername,
-                'doctor_schedule_id' => $schedule->id,
-                'date'               => $request->date,
-                'time'               => $schedule->open_time,
-                'queue_order'        => $queueOrder,
-                'status'             => 'pending',
-                'notes'              => $request->notes,
-            ]);
-
-            $onlineSession = \App\Models\OnlineSession::create([
-                'doctor'           => $request->doctor_id,
+    try {
+        $consultation = null;
+        DB::transaction(function () use ($patient, $doctor, &$consultation) {
+            $onlineSession = OnlineSession::create([
+                'doctor'           => $doctor->username,
                 'start_time'       => now(),
                 'end_time'         => null,
                 'consultation_fee' => 0,
-                'description'      => 'Appointment #' . $appointment->id,
+                'description'      => 'Konsultasi chat langsung',
             ]);
 
-            Consultation::create([
+            $consultation = Consultation::create([
                 'online_session_id' => $onlineSession->id,
-                'patient'           => $patientUsername,
+                'patient'           => $patient,
                 'start_time'        => now(),
                 'end_time'          => null,
-                'notes'             => $request->notes,
+                'notes'             => null,
                 'paid_at'           => null,
             ]);
+        });
 
-            DB::commit();
-
-            return response()->json([
-                'success'      => true,
-                'message'      => 'Booking jadwal konsultasi berhasil.',
-                'queue_order'  => $appointment->queue_order,
-                'appointment'  => $appointment,
-            ]);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal menyimpan data booking: ' . $e->getMessage()
-            ], 500);
+        if ($consultation) {
+            return redirect()->route('chat', $consultation->id);
         }
+
+        return redirect()->back()->with('error', 'Gagal membuat konsultasi.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+    }
+}
+    
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Doctor $doctor)
+    {
+
     }
 
     /**

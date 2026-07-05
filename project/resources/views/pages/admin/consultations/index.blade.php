@@ -7,10 +7,12 @@
                 <p class="text-muted mb-0">Manajemen jadwal dan riwayat konsultasi pasien.</p>
             </div>
 
-            <a href="/admin/consultations/create" class="btn btn-primary shadow-sm">
-                <i class="bi bi-plus-circle"></i>
-                Add new Consultation
-            </a>
+            @if(auth()->user()->role === \App\Data\Value\Account\Role::ADMIN->value)
+                <a href="/portal/consultations/create" class="btn btn-primary shadow-sm">
+                    <i class="bi bi-plus-circle"></i>
+                    Add new Consultation
+                </a>
+            @endif
         </div>
 
         <div class="card shadow-sm border-0">
@@ -72,14 +74,17 @@
 
             let consultationToDelete = null;
 
+            // admin -> fetch all, doctor -> fetch biasa
+            let fetchUrl = '{{ auth()->user()->role === \App\Data\Value\Account\Role::ADMIN->value ? "/api/admin/consultations/fetch-all" : "/api/consultations/fetch" }}';
+
             function loadConsultations() {
                 let container = $('#consultation-container');
                 let tbody = $('#consultations-table tbody');
                 let loadingIndicator = $('#loading-indicator');
                 let tableWrapper = $('#table-wrapper');
 
-                $.ajax({
-                    url: `/api/admin/consultations/fetch-all`,
+                $.ajax({                    
+                    url: fetchUrl,
                     method: 'GET',
                     success: function (response) {
                         if (response.success && response.data.length > 0) {
@@ -110,7 +115,21 @@
                                 let paymentStatus = consultation.paid_at
                                     ? '<span class="badge bg-success">Lunas</span>'
                                     : '<span class="badge bg-warning">Belum Bayar</span>';
-                                
+                                                               
+                                let actionButtons = `
+                                    <a href="/portal/consultations/${consultation.id}/show" class="btn btn-sm btn-warning text-white" title="Detail">
+                                        Detail
+                                    </a>
+                                `;
+                               
+                                @if(auth()->user()->role === \App\Data\Value\Account\Role::ADMIN->value)
+                                actionButtons += `
+                                    <button type="button" class="btn btn-sm btn-danger text-white btn-delete" data-id="${consultation.id}" title="Hapus">
+                                        Delete
+                                    </button>
+                                `;
+                                @endif
+
                                 rowsHtml += `
                                         <tr id="tr_${consultation.id}">
                                             <td class="text-center">${consultation.id}</td>
@@ -119,12 +138,7 @@
                                             <td>${startDate}</td>
                                             <td class="text-center">${paymentStatus}</td>
                                             <td class="text-center">
-                                                <a href="/admin/consultations/${consultation.id}/show" class="btn btn-sm btn-warning text-white" title="Detail">
-                                                    Detail
-                                                </a>                                            
-                                                <button type="button" class="btn btn-sm btn-danger text-white btn-delete" data-id="${consultation.id}" title="Hapus">
-                                                    Delete
-                                                </button>                    
+                                                ${actionButtons}
                                             </td>
                                         </tr>
                                     `;
@@ -161,8 +175,8 @@
 
                 btn.html('<span class="spinner-border spinner-border-sm"></span> Menghapus...').prop('disabled', true);
 
-                $.ajax({                    
-                    url: `/api/admin/consultations/${consultationToDelete}/destroy`,
+                $.ajax({                                       
+                    url: `/api/portal/consultations/${consultationToDelete}/destroy`,
                     method: 'POST',
                     data: {
                         '_token': '{{ csrf_token() }}'

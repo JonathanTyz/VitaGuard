@@ -7,8 +7,9 @@ use App\Http\Controllers\Controller;
 // for fetch list table instantly
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-
+use App\Data\Value\Account\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
 use App\Models\ArticleTopic;
 use App\Models\Allergen;
@@ -55,20 +56,58 @@ class HomeController extends Controller
         return view('pages.welcome', compact('articles'));
     }
 
-    public function adminDashboard()
+    public function fetchDashboardData()
     {
+        $user = Auth::user();
+
+        if ($user->role === Role::DOCTOR->value) {
+
+            $upcomingAppointments = Appointment::whereHas('schedule', function ($q) use ($user) {
+                $q->where('doctor', $user->username);
+            })                
+                ->whereDate('date', today())
+                ->where('status', 'pending')
+                ->orderBy('time', 'asc')
+                ->take(5)
+                ->get();
+
+            $data = [
+                'role' => 'doctor',
+                'doctor_name' => $user->doctor->first_name ?? $user->username,
+                'appointments_today' => Appointment::whereHas('schedule', function ($q) use ($user) {
+                    $q->where('doctor', $user->username);
+                })
+                    ->whereDate('date', today())
+                    ->where('status', '!=', 'cancelled')
+                    ->count(),
+                'total_articles' => Article::where('creator', $user->username)->count(),
+                'upcoming_appointments' => $upcomingAppointments,
+            ];
+
+        } elseif ($user->role === Role::ADMIN->value) {
+
+            $data = [
+                'role' => 'admin',
+                'totalDoctor' => Doctor::count(),
+                'totalMember' => Member::count(),
+                'totalArticle' => Article::count(),
+                'totalAppointment' => Appointment::count(),
+                'totalOngoingConsultation' => Consultation::whereNotNull('start_time')
+                    ->whereNull('end_time')
+                    ->count(),
+                'totalCompletedConsultation' => Consultation::whereNotNull('end_time')
+                    ->count()
+            ];
+
+        } else {
+            return response()->json(['success' => false, 'message' => 'Unauthorized role'], 403);
+        }
+
         return response()->json([
-            'totalDoctor' => Doctor::count(),
-            'totalMember' => Member::count(),
-            'totalArticle' => Article::count(),
-            'totalAppointment' => Appointment::count(),
-            'totalOngoingConsultation' => Consultation::whereNotNull('start_time')
-                ->whereNull('end_time')
-                ->count(),
-            'totalCompletedConsultation' => Consultation::whereNotNull('end_time')
-                ->count()
+            'success' => true,
+            'data' => $data
         ]);
-    }
+    }    
 
     public function fetchAdminTable($tableName)
     {

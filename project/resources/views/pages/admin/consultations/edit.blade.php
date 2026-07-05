@@ -6,7 +6,7 @@
                 <h4><i class="bi bi-pencil-square text-primary"></i> Edit Konsultasi</h4>
                 <p class="text-muted mb-0">Perbarui jadwal dan catatan konsultasi.</p>
             </div>
-            <a href="/admin/consultations" class="btn btn-outline-secondary btn-sm shadow-sm">
+            <a href="/portal/consultations" class="btn btn-outline-secondary btn-sm shadow-sm">
                 <i class="bi bi-arrow-left"></i> Kembali
             </a>
         </div>
@@ -134,7 +134,7 @@
                     success: function (response) {
                         if (response.success) {
                             alert('Sukses! ' + response.message);
-                            $(location).attr('href', '/admin/consultations');
+                            $(location).attr('href', '/portal/consultations');
                         }
                     },
                     error: function (xhr) {

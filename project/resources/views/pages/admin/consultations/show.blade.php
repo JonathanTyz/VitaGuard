@@ -6,7 +6,7 @@
                 <h4><i class="bi bi-file-earmark-medical text-primary"></i> Detail Konsultasi</h4>
                 <p class="text-muted mb-0">Informasi lengkap mengenai jadwal, pasien, dan catatan medis.</p>
             </div>
-            <a href="/admin/consultations" class="btn btn-outline-secondary shadow-sm">
+            <a href="/portal/consultations" class="btn btn-outline-secondary shadow-sm">
                 <i class="bi bi-arrow-left"></i> Kembali
             </a>
         </div>
@@ -20,6 +20,9 @@
                     </div>
                     <div class="ms-3 ml-3">
                         <h4 class="mb-1">Konsultasi #<span id="header_id">-</span></h4>
+                        <a href="#" id="btn-chat" class="btn btn-primary shadow-sm">
+                            <i class="bi bi-chat"></i> Lihat chat
+                        </a>
                         <span id="payment_badge_header"></span>
                         <span id="status_badge_header" class="ml-1"></span>
                     </div>
@@ -86,10 +89,7 @@
                 </table>
             </div>
 
-            <div class="card-footer bg-light p-3 text-right border-top-0">
-                <a href="#" id="btn-edit" class="btn btn-warning shadow-sm">
-                    <i class="bi bi-pencil-square"></i> Edit Konsultasi
-                </a>
+            <div class="card-footer bg-light p-3 text-right border-top-0">                
                 <button class="btn btn-secondary ml-2" onclick="window.history.back()">Tutup</button>
             </div>
         </div>
@@ -102,7 +102,7 @@
             let path = window.location.pathname.split('/');
             let targetId = path[path.length - 2];
 
-            $("#btn-edit").attr("href", `/admin/consultations/${targetId}/edit`);
+            $("#btn-chat").attr("href", `/chat/${targetId}`);
 
             const formatCurrency = (amount) => {
                 return new Intl.NumberFormat('id-ID', {
@@ -119,7 +119,7 @@
             };
 
             $.ajax({
-                url: `/api/admin/consultations/${targetId}/detail`,
+                url: `/api/consultations/${targetId}/detail`,
                 method: "GET",
                 success: function (res) {
                     if (res.success) {

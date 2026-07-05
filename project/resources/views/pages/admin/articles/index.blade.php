@@ -73,14 +73,13 @@
                     url: `/api/articles/fetch`,
                     method: 'GET',
                     success: function (response) {
-                        if (response.success && response.data.length > 0) {
-                            let articles = response.data;
+                        if (response.success && response.data.data && response.data.data.length > 0) {
+                            let articles = response.data.data;
                             let rowsHtml = '';
 
                             articles.forEach(article => {
-
-                                let creatorName = article.creator.username || '-';
-                                let topicName = article.topic.name || '-';
+                                let creatorName = article.creator ? article.creator.username : '-'; // Tambahkan pengecekan if exists
+                                let topicName = article.topic ? article.topic.name : '-';           // Tambahkan pengecekan if exists
 
                                 rowsHtml += `
                                     <tr id="tr_${article.id}">
@@ -97,16 +96,15 @@
                                     </tr>
                                 `;
                             });
-
-                            // 3. Masukkan rakitan baris ke dalam tbody
+                            
                             tbody.html(rowsHtml);
-
-                            // 4. Sembunyikan loading, lalu tampilkan tabel
+                            
                             loadingIndicator.hide();
                             tableWrapper.show();
 
                         }
                         else {
+                            loadingIndicator.hide();
                             container.html('<div class="alert alert-warning m-4 text-center">No article data</div>');
                         }
                     },

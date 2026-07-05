@@ -14,7 +14,7 @@ class ArticlePolicy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->role === Role::ADMIN->value || $user->role === Role::DOCTOR->value;
     }
 
     /**
@@ -23,6 +23,11 @@ class ArticlePolicy
     public function view(User $user, Article $article): bool
     {
         return true;
+    }
+
+    public function viewBackend(User $user): bool
+    {
+        return $user->role === Role::ADMIN->value || $user->role === Role::DOCTOR->value;
     }
 
     /**
@@ -58,7 +63,7 @@ class ArticlePolicy
         if ($user->role === Role::ADMIN->value) {
             return true;
         }
-        
+
         if ($user->role === Role::DOCTOR->value) {
             return $user->username === $article->creator;
         }

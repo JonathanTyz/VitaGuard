@@ -97,15 +97,15 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: "/api/admin/dashboard",
+                url: "/api/dashboard/fetch",
                 method: "GET",
                 success: function (res) {
-                    $("#doctor-count").text(res.totalDoctor);
-                    $("#member-count").text(res.totalMember);
-                    $("#article-count").text(res.totalArticle);
-                    $("#booking-count").text(res.totalAppointment);
-                    $("#ongoing-count").text(res.totalOngoingConsultation);
-                    $("#finished-count").text(res.totalCompletedConsultation);
+                    $("#doctor-count").text(res.data.totalDoctor);
+                    $("#member-count").text(res.data.totalMember);
+                    $("#article-count").text(res.data.totalArticle);
+                    $("#booking-count").text(res.data.totalAppointment);
+                    $("#ongoing-count").text(res.data.totalOngoingConsultation);
+                    $("#finished-count").text(res.data.totalCompletedConsultation);
                     new Chart(document.getElementById("dashboardChart"), {
                         type: "bar",
                         data: {
@@ -117,9 +117,9 @@
                             datasets: [{
                                 label: "Total",
                                 data: [
-                                    res.totalAppointment,
-                                    res.totalOngoingConsultation,
-                                    res.totalCompletedConsultation
+                                    res.data.totalAppointment,
+                                    res.data.totalOngoingConsultation,
+                                    res.data.totalCompletedConsultation
                                 ]
                             }]
                         },

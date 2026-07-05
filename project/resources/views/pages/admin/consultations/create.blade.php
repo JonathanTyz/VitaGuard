@@ -6,7 +6,7 @@
                 <h4><i class="bi bi-calendar-plus text-primary"></i> Tambah Konsultasi</h4>
                 <p class="text-muted mb-0">Jadwalkan sesi konsultasi baru.</p>
             </div>
-            <a href="/admin/consultations" class="btn btn-outline-secondary btn-sm shadow-sm">
+            <a href="/portal/consultations" class="btn btn-outline-secondary btn-sm shadow-sm">
                 <i class="bi bi-arrow-left"></i> Kembali
             </a>
         </div>
@@ -72,7 +72,7 @@
         $(document).ready(function () {
             function loadDropdowns() {
                 $.ajax({
-                    url: '/api/admin/consultations/create-data',
+                    url: '/api/consultations/create-data',
                     method: 'GET',
                     success: function (response) {
                         if (response.success) {
@@ -111,7 +111,7 @@
                     success: function (response) {
                         if (response.success) {
                             alert('Sukses! ' + response.message);
-                            $(location).attr('href', '/admin/consultations');
+                            $(location).attr('href', '/portal/consultations');
                         }
                     },
                     error: function (xhr) {

@@ -38,6 +38,8 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Member::class);
+
         $existingUser = User::where('username', $request->username)->first();
 
         $rules = [
@@ -164,6 +166,8 @@ class MemberController extends Controller
 
         $member = Member::where('username', $username)->firstOrFail();
 
+        $this->authorize('update', $member);
+
         $member->update([
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
@@ -196,6 +200,7 @@ class MemberController extends Controller
             $user = User::where('username', $username)->firstOrFail();
 
             Member::where('username', $username)->delete();
+            $this->authorize('delete', $user);
             $user->delete();
 
             DB::commit();

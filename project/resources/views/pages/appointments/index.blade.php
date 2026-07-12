@@ -149,8 +149,7 @@
                             <span class="text-warning">⭐ {{ number_format($doctor->rating_avg, 1) }}</span>
                             <span class="text-muted" style="font-size: 0.85rem;">({{ $doctor->rating_count }} reviews)</span>
                         </div>
-                    </div>
-                    <!-- TOMBOL CHAT DIHAPUS -->
+                    </div>                    
                 </div>
             </div>
             <hr class="my-3 border-light">

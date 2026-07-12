@@ -79,7 +79,7 @@
 
             function loadFormData() {
                 $.ajax({
-                    url: '/api/admin/consultations/create-data',
+                    url: '/api/consultations/create-data',
                     method: 'GET',
                     success: function (resDropdown) {
                         if (resDropdown.success) {

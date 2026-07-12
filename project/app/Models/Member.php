@@ -4,11 +4,13 @@ namespace App\Models;
 
 use App\Data\Medic\MedicalProfile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $primaryKey = 'username';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -26,6 +28,14 @@ class Member extends Model
     protected $casts = [
         'date_of_birth' => 'date',
     ];
+
+    protected static function booted()
+    {
+        static::deleting(function ($member) {            
+            $member->appointments()->delete();
+            $member->consultations()->delete();            
+        });
+    }
 
     public function user()
     {
@@ -48,5 +58,13 @@ class Member extends Model
     public function Prescriptions()
     {
         return $this->hasMany(Prescription::class, 'patient', 'username');
+    }
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class, 'patient', 'username');
+    }
+    public function consultations()
+    {
+        return $this->hasMany(Consultation::class, 'patient', 'username');
     }
 }

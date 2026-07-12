@@ -228,13 +228,14 @@ class ConsultationController extends Controller
     public function edit($id)
     {
         $consultation = Consultation::find($id);
-
+        
         if (!$consultation) {
             return response()->json([
                 'success' => false,
                 'message' => 'Data Konsultasi tidak ditemukan'
-            ], 404);
-        }
+                ], 404);
+                }
+            $this->authorize('update', $consultation);
 
         return response()->json([
             'success' => true,

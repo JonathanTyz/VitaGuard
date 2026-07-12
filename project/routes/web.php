@@ -33,6 +33,7 @@ Route::prefix('api/')->group(function () {
     Route::get('articles/topics', [ArticleController::class, 'getArticleTopics']);
     Route::get('articles/{article}/detail', [ArticleController::class, 'show']);
     Route::get('articles/popular-topics', [ArticleController::class, 'getPopularArticleTopics']);
+    Route::get('doctors/fetch', [DoctorController::class,'fetchDoctors']);
 
     Route::prefix('auth/')->group(function () {
         Route::post('login', [AuthController::class, 'login']);
@@ -47,14 +48,14 @@ Route::prefix('api/')->group(function () {
     // );
 
     Route::middleware(['auth'])->group(function () {        
+        Route::put('/appointments/{id}/status', [AppointmentController::class, 'updateStatus']);
+        Route::get('/appointments/fetch', [AppointmentController::class, 'fetchAppointments']);
         Route::get('consultations/fetch', [ConsultationController::class, 'fetchConsultations']);
         Route::get('consultations/{username}/detail', [ConsultationController::class, 'show']);
         Route::get('/consultations/start/{doctor:username}', [ConsultationController::class, 'start'])
             ->name('consultation.start');
         Route::get('consultations/create-data', [ConsultationController::class, 'create']);
-        Route::get('chat/{consultation}', [ChatController::class, 'fetchMessages']);
-        Route::put('/appointments/{id}/status', [AppointmentController::class, 'updateStatus']);
-        Route::get('/appointments/fetch', [AppointmentController::class, 'fetchAppointments']);
+        Route::get('chat/{consultation}', [ChatController::class, 'fetchMessages']);        
         Route::get('/doctor/appointments/fetch', [AppointmentController::class, 'fetchDoctorAppointments']);
         Route::get('dashboard/fetch', [HomeController::class, 'fetchDashboardData']);
         Route::get('profile/fetch', [ProfileController::class, 'fetch']);
@@ -98,6 +99,7 @@ Route::prefix('api/')->group(function () {
         // DELETE        
         Route::post('doctors/{doctor}/destroy', [DoctorController::class, 'destroy'])->name('doctor.deleteData');
         Route::post('members/{username}/destroy', [MemberController::class, 'destroy'])->name('member.deleteData');
+        // Route::post('members/{username}/deactivate', [MemberController::class, 'deactivate'])->name('member.deactivate');
         Route::post('users/{username}/destroy', [UserController::class, 'destroy'])->name('user.deleteData');
         Route::post('consultations/{id}/destroy', [ConsultationController::class, 'destroy'])->name('consultation.deleteData');
         Route::post('articles/{article}/destroy', [ArticleController::class, 'destroy'])->middleware('can:delete,article');
@@ -135,9 +137,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('consultations')->group(function () {
             Route::view('/', 'pages.admin.consultations.index');
-            Route::view('/create', 'pages.admin.consultations.create');
-            Route::view('/{username}/show', 'pages.admin.consultations.show');
-            Route::view('/{username}/edit', 'pages.admin.consultations.edit');
+            Route::view('/{username}/show', 'pages.admin.consultations.show');            
         });
     });
 
@@ -173,6 +173,11 @@ Route::middleware(['auth'])->group(function () {
             Route::view('/create', 'pages.admin.articles.create')->name('articles.create');
             Route::view('/{article}/show', 'pages.admin.articles.show');
             Route::view('/{article}/edit', 'pages.admin.articles.edit');
+        });
+
+        Route::prefix('consultations')->group(function () {
+            Route::view('/create', 'pages.admin.consultations.create');
+            Route::view('/{username}/edit', 'pages.admin.consultations.edit');
         });
     });
 

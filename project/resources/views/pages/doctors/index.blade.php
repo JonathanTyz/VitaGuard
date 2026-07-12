@@ -1,141 +1,140 @@
 @extends('layouts.navbar.main')
+
 @section('content')
-<div class="container" style="margin-top: 64px; margin-bottom: 50px;">
-    <div class="row mb-4 text-center">
-        <div class="col-12">
-            <h2 class="font-weight-bold">Find Your Doctor</h2>
-            <p class="text-muted">Choose from our top specialists to get the best care.</p>
-        </div>
-        <div class="col-12 mt-3">
-            <ul class="nav nav-pills justify-content-center" id="specialty-pills" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#" role="tab">All Specialties</a>
-                </li>
-                @foreach($specialties as $speciality)
-                <li class="nav-item">
-                    <a class="nav-link" href="#" role="tab">{{$speciality->name}}</a>
-                </li>                
-                @endforeach
-            </ul>
+    <div class="bg-primary text-white py-5 mb-5">
+        <div class="container text-center">
+            <h1 class="fw-bold mb-3">Temui Tim Medis Kami</h1>
+            <p class="lead mb-0">Dokter spesialis berpengalaman yang siap membantu menjaga kesehatan Anda dan keluarga.</p>
         </div>
     </div>
-    <div class="row">
-        @forelse($doctors as $doctor)
 
-        @php
-        $fullName = trim($doctor->prefix_name . ' ' . $doctor->first_name . ' ' . $doctor->middle_name . ' ' . $doctor->last_name);
-        $fullNameWithTitle = $fullName . ($doctor->suffix_name ? ', ' . $doctor->suffix_name : '');
-        @endphp
-
-        <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card h-100 shadow-sm doctor-card border">
-                {{-- Dummy Profile Picture --}}
-                <img class="card-img-top" src="https://ui-avatars.com/api/?name={{ urlencode($fullName) }}&background=random&size=250" alt="Doctor Picture" style="height: 200px; object-fit: cover;">
-
-                <div class="card-body text-center">
-                    <h5 class="card-title font-weight-bold mb-1">{{ $fullNameWithTitle }}</h5>
-                    <p class="text-muted mb-2">
-                        <small>
-                            {{ $doctor->doctorSpecialty?->first()?->specialties?->name ?? 'General Practitioner' }}
-                        </small>
-                    </p>
-
-                    <div class="mb-3">
-                        <span class="text-warning">⭐ {{ number_format($doctor->rating_avg, 1) }}</span>
-                        <span class="text-muted" style="font-size: 0.85rem;">({{ $doctor->rating_count }} reviews)</span>
-                    </div>
-
-                    <button type="button" class="btn btn-outline-primary btn-block rounded-pill" data-toggle="modal" data-target="#doctorModal-{{ $doctor->username }}">
-                        View Profile
-                    </button>
+    <div class="container mb-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8 col-lg-6">
+                <div class="input-group shadow-sm rounded-pill overflow-hidden">
+                    <span class="input-group-text bg-white border-0 ps-4">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input type="search" class="form-control border-0 py-3" id="search-doctor"
+                        placeholder="Cari nama dokter atau spesialisasi...">
                 </div>
             </div>
         </div>
 
-        <!-- Modal detail doctor -->
-        <div class="modal fade" id="doctorModal-{{ $doctor->username }}" tabindex="-1" role="dialog" aria-labelledby="doctorModalLabel-{{ $doctor->username }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header border-0 pb-0">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center pt-0">
-                        <img src="https://ui-avatars.com/api/?name={{ urlencode($fullName) }}&background=random&size=150" class="rounded-circle mb-3 shadow" alt="Doctor Picture">
-                        <h4 class="font-weight-bold">{{ $fullNameWithTitle }}</h4>
-                        <p class="text-primary mb-2">Username: {{ $doctor->username }}</p>
-
-                        <div class="d-flex justify-content-center mb-3">
-                            <div class="px-3 border-right">
-                                <h5 class="mb-0 text-warning">⭐ {{ number_format($doctor->rating_avg, 1) }}</h5>
-                                <small class="text-muted">Rating</small>
-                            </div>
-                            <div class="px-3">
-                                <h5 class="mb-0">{{ $doctor->rating_count }}</h5>
-                                <small class="text-muted">Patients</small>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="text-left px-3">
-                            <p class="mb-1"><strong><i class="fas fa-birthday-cake"></i> Date of Birth:</strong> <br>
-                                {{ \Carbon\Carbon::parse($doctor->date_of_birth)->format('d F Y') }}
-                            </p>
-                            <p class="mb-1 mt-3"><strong><i class="fas fa-map-marker-alt"></i> Address:</strong> <br>
-                                {{ $doctor->address }}
-                            </p>
-                            <p class="mb-1 mt-3"><strong><i class="fas fa-map"></i> District ID:</strong> <br>
-                                {{ $doctor->district->name }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="modal-footer bg-light border-0 justify-content-center">
-                        <a href="/consultations/create?doctor={{ $doctor->username }}" class="btn btn-primary px-4 rounded-pill">Book Consultation</a>
-                    </div>
-                </div>
-            </div>
+        <div id="loading-indicator" class="text-center py-5">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"></div>
+            <p class="text-muted mt-3">Memuat data dokter...</p>
         </div>
-        {{-- End Modal --}}
 
-        @empty
-        <div class="col-12 text-center mt-5">
-            <h5 class="text-muted">No doctors currently available.</h5>
-        </div>
-        @endforelse
+        <div class="row" id="doctors-container" style="display: none;"></div>
     </div>
-</div>
-<style>
-    .doctor-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: none;
-        border-radius: 12px;
-        overflow: hidden;
-    }
 
-    .doctor-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-    }
+    <style>
+        .doctor-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 1rem;
+        }
 
-    .nav-pills .nav-link {
-        color: #495057;
-        border-radius: 50px;
-        margin: 0 5px;
-        padding: 8px 20px;
-        transition: all 0.3s;
-    }
+        .doctor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1) !important;
+        }
 
-    .nav-pills .nav-link.active,
-    .nav-pills .show>.nav-link {
-        background-color: #007bff;
-        color: white;
-        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
-    }
+        .doctor-avatar {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 4px solid #f8f9fa;
+        }
+    </style>
+@endsection
 
-    .nav-pills .nav-link:hover:not(.active) {
-        background-color: #f8f9fa;
-    }
-</style>
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            fetchDoctors();
+
+            function fetchDoctors() {
+                $.ajax({
+                    url: '/api/doctors/fetch',
+                    method: 'GET',
+                    success: function (response) {
+                        if (response.success && response.data.length > 0) {
+                            renderDoctors(response.data);
+                        } else {
+                            showEmptyState();
+                        }
+                    },
+                    error: function () {
+                        $('#loading-indicator').html('<div class="alert alert-danger mx-auto" style="max-width: 500px;">Gagal memuat data dokter. Silakan coba beberapa saat lagi.</div>');
+                    }
+                });
+            }
+
+            function renderDoctors(doctors) {
+                let container = $('#doctors-container');
+                container.empty();
+
+                doctors.forEach(function (doc) {
+                    let nameParts = [doc.prefix_name, doc.first_name, doc.middle_name, doc.last_name, doc.suffix_name];
+                    let fullName = nameParts.filter(part => part !== null && part !== '').join(' ');
+
+                    let specialtiesHtml = '';
+                    if (doc.specialties && doc.specialties.length > 0) {
+                        let specialtyNames = doc.specialties.map(s => s.specialty.name).join(', ');
+                        specialtiesHtml = `<span class="badge bg-info text-dark mb-2 px-3 py-2 rounded-pill">${specialtyNames}</span>`;
+                    } else {
+                        specialtiesHtml = `<span class="badge bg-secondary mb-2 px-3 py-2 rounded-pill">Dokter Umum</span>`;
+                    }
+
+                    let cardHtml = `
+                        <div class="col-md-6 col-lg-4 mb-4 doctor-item">
+                            <div class="card h-100 border-0 shadow-sm doctor-card text-center p-3">
+                                <div class="card-body d-flex flex-column align-items-center">
+
+                                    <div class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center shadow-sm doctor-avatar mb-3" style="font-size: 2.5rem;">
+                                        ${doc.first_name.charAt(0).toUpperCase()}
+                                    </div>
+
+                                    ${specialtiesHtml}
+
+                                    <h5 class="card-title fw-bold text-dark mt-2 mb-1 doctor-name">${fullName}</h5>
+
+                                    <div class="text-warning mb-3">
+                                        <i class="bi bi-star-fill"></i>
+                                        <span class="text-dark fw-bold ms-1">${doc.rating_avg !== null ? doc.rating_avg : '0.00'}</span>
+                                        <span class="text-muted small">(${doc.rating_count} ulasan)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.append(cardHtml);
+                });
+
+                $('#loading-indicator').fadeOut(300, function () {
+                    $('#doctors-container').fadeIn(500);
+                });
+            }
+
+            function showEmptyState() {
+                $('#loading-indicator').fadeOut(300, function () {
+                    $('#doctors-container').html(`
+                        <div class="col-12 text-center py-5">
+                            <i class="bi bi-person-x text-muted mb-3" style="font-size: 4rem;"></i>
+                            <h4 class="text-muted">Belum ada data dokter yang tersedia.</h4>
+                        </div>
+                    `).fadeIn(500);
+                });
+            }
+
+            $('#search-doctor').on('input', function () {
+                let value = $(this).val().toLowerCase();
+
+                $('.doctor-item').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
 @endsection

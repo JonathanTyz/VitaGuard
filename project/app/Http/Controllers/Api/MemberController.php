@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Member;
 use App\Models\User;
+use App\Models\Appointment;
+use App\Models\Consultation;
 use App\Data\Value\Account\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -198,16 +200,18 @@ class MemberController extends Controller
         DB::beginTransaction();
         try {
             $user = User::where('username', $username)->firstOrFail();
+            $member = Member::where('username', $username)->firstOrFail();
 
-            Member::where('username', $username)->delete();
-            $this->authorize('delete', $user);
+            $this->authorize('delete', $member);
+            
+            $member->delete(); 
             $user->delete();
 
             DB::commit();
 
             return response()->json([
                 'success' => true,
-                'message' => 'Data Member berhasil dihapus!'
+                'message' => 'Akun Member dan riwayatnya berhasil diarsipkan (Soft Delete)!'
             ]);
 
         } catch (\Exception $e) {
@@ -215,6 +219,30 @@ class MemberController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Gagal menghapus data: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function deactivate($username)
+    {
+        try {
+            $user = User::where('username', $username)->firstOrFail();
+            $member = Member::where('username', $username)->firstOrFail();
+
+            $this->authorize('update', $member);
+
+            $user->status = 'inactive';
+            $user->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => "Akun member {$username} berhasil dinonaktifkan. Pasien tidak akan bisa login lagi."
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menonaktifkan akun: ' . $e->getMessage()
             ], 500);
         }
     }

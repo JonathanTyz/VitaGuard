@@ -154,7 +154,7 @@
                 let formData = $(this).serialize();
 
                 $.ajax({
-                    url: `/api/articles/${article_id}/update`,
+                    url: `/api/admin/articles/${article_id}/update`,
                     method: 'POST',
                     data: formData,
                     success: function (response) {

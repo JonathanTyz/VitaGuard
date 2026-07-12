@@ -67,9 +67,7 @@ $(document).ready(function () {
                         html += `
                             <div class="card mb-3 border-0 shadow-sm" style="border-radius:12px; overflow:hidden;">
                                 <div class="card-body p-0">
-                                    <div class="d-flex">
-
-        
+                                    <div class="d-flex">                                        
                                         <div style="width:5px; background:${item.status === 'pending' ? '#f59e0b' : (item.status === 'confirmed' ? '#10b981' : '#6b7280')}; flex-shrink:0;"></div>
 
                                         <div class="d-flex justify-content-between align-items-center w-100 p-3">
@@ -85,7 +83,7 @@ $(document).ready(function () {
                                                     <i class="bi bi-sort-numeric-down"></i> ${queueInfo}
                                                 </small>
                                                 ${item.notes ? `<small class="text-muted d-block mt-1"><i class="bi bi-journal-text"></i> ${item.notes}</small>` : ''}
-                                            </div>
+                                            </div>                                                                                        
                                             <div class="d-flex align-items-center ml-3" style="flex-shrink:0;">
                                                 ${statusBadge}
                                             </div>

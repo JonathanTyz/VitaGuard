@@ -57,7 +57,7 @@
             let articleId = pathSegments[pathSegments.length - 2];
             $('#btn-edit').attr('href', `/admin/articles/${articleId}/edit`);
             $.ajax({
-                url: `/api/admin/articles/${articleId}/detail`,
+                url: `/api/articles/${articleId}/detail`,
                 method: 'GET',
                 success: function (response) {
                     if (!response.success) return;

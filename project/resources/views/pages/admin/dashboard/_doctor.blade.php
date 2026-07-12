@@ -24,7 +24,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Janji Temu Hari Ini</p>
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Appointments</p>
                                         <h5 class="font-weight-bolder mb-0 text-primary">
                                             <span id="count-appointments">0</span> Pasien
                                         </h5>
